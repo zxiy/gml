@@ -28,6 +28,11 @@ namespace gml
 		set(rhs.x, rhs.y, rhs.z);
 	}
 
+	vector3::vector3(const vector4& rhs)
+	{
+		set(rhs.x, rhs.y, rhs.z);
+	}
+
 	vector3 vector3::operator-() const
 	{
 		return vector3(-x, -y, -z);
@@ -35,15 +40,24 @@ namespace gml
 
 	vector3& vector3::operator=(const vector3& rhs)
 	{
-		if (&rhs == this)
-			return *this;
+		if (&rhs != this)
+		{
+			set(rhs.x, rhs.y, rhs.z);
+		}
+		return *this;
+	}
 
+	vector3& vector3::operator=(const vector4& rhs)
+	{
 		set(rhs.x, rhs.y, rhs.z);
 		return *this;
 	}
 
 	bool vector3::operator==(const vector3& other) const
 	{
+		if (&other == this)
+			return true;
+
 		return fequal(x, other.x) &&
 			fequal(y, other.y) &&
 			fequal(z, other.z);
@@ -51,6 +65,8 @@ namespace gml
 
 	bool vector3::operator!=(const vector3& other) const
 	{
+		if (&other == this)
+			return false;
 		return !fequal(x, other.x) ||
 			!fequal(y, other.y) ||
 			!fequal(z, other.z);
@@ -231,9 +247,19 @@ namespace gml
 		return sqrtf(x*x + y*y + z*z);
 	}
 
-	float vector3::lengthsquare() const
+	float vector3::length_sqr() const
 	{
 		return x*x + y*y + z*z;
+	}
+
+	vector4 vector3::to_vector4() const
+	{
+		return vector4(x, y, z, 0.0f);
+	}
+
+	vector4 vector3::to_position4() const
+	{
+		return vector4(x, y, z, 1.0f);
 	}
 
 	vector3 operator+(float value, const vector3& rhs)

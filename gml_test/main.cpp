@@ -28,7 +28,7 @@ void testVector3()
 
 	std::cout <<"  c = <" << c.x << "," << c.y << "," << c.z << ">\n"
 		<<"  b.length = " << b.length() << "\n"
-		<<"  b.lengthsquare = " <<b.lengthsquare() << "\n";
+		<<"  b.lengthsquare = " <<b.length_sqr() << "\n";
 	
 	b.normalize();
 	std::cout << "  normalized: " << b.length() << "\n\n";
@@ -78,7 +78,7 @@ void testVector2()
 
 	std::cout << "  c = <" << c.x << "," << c.y <<">\n"
 		<< "  b.length = " << b.length() << "\n"
-		<< "  b.lengthsquare = " << b.lengthsquare() << "\n";
+		<< "  b.lengthsquare = " << b.length_sqr() << "\n";
 
 	b.normalize();
 	std::cout << "  normalized: " << b.length() << "\n\n";

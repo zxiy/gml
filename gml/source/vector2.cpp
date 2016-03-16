@@ -26,6 +26,11 @@ namespace gml
 		set(rhs.x, rhs.y);
 	}
 
+	vector2::vector2(const vector3& rhs)
+	{
+		set(rhs.x, rhs.y);
+	}
+
 	vector2 vector2::operator-() const
 	{
 		return vector2(-x, -y);
@@ -40,14 +45,26 @@ namespace gml
 		return *this;
 	}
 
+	vector2& vector2::operator=(const vector3& rhs)
+	{
+		set(rhs.x, rhs.y);
+		return *this;
+	}
+
 	bool vector2::operator==(const vector2& other) const
 	{
+		if (&other == this)
+			return true;
+
 		return fequal(x, other.x) &&
 			fequal(y, other.y);
 	}
 
 	bool vector2::operator!=(const vector2& other) const
 	{
+		if (&other == this)
+			return false;
+
 		return !fequal(x, other.x) ||
 			!fequal(y, other.y);
 	}
@@ -218,9 +235,19 @@ namespace gml
 		return sqrtf(x*x + y*y);
 	}
 
-	float vector2::lengthsquare() const
+	float vector2::length_sqr() const
 	{
 		return x*x + y*y;
+	}
+
+	vector3 vector2::to_vector3() const
+	{
+		return vector3(x, y, 0.0f);
+	}
+
+	vector3 vector2::to_position3() const
+	{
+		return vector3(x, y, 1.0f);
 	}
 
 	vector2 operator+(float value, const vector2& rhs)

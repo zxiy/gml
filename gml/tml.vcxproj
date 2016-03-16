@@ -22,11 +22,13 @@
     <ClInclude Include="include\math_util.h" />
     <ClInclude Include="include\vector2.h" />
     <ClInclude Include="include\vector3.h" />
+    <ClInclude Include="include\vector4.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\math_util.cpp" />
     <ClCompile Include="source\vector2.cpp" />
     <ClCompile Include="source\vector3.cpp" />
+    <ClCompile Include="source\vector4.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C384FDDC-5910-4E73-915D-7B520A068163}</ProjectGuid>

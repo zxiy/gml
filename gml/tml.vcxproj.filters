@@ -24,6 +24,9 @@
     <ClInclude Include="include\math_util.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="include\vector4.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\vector2.cpp">
@@ -33,6 +36,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="source\math_util.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vector4.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

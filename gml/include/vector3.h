@@ -1,5 +1,6 @@
 #pragma once
 
+#include <gml/include/vector4.h>
 namespace gml
 {
 	class vector3
@@ -28,9 +29,13 @@ namespace gml
 
 		vector3(const vector3& rhs);
 
+		vector3(const vector4& rhs);
+
 		vector3 operator-() const;
 
 		vector3& operator=(const vector3& rhs);
+
+		vector3& operator=(const vector4& rhs);
 
 		bool operator==(const vector3& other) const;
 
@@ -85,7 +90,11 @@ namespace gml
 
 		float length() const;
 
-		float lengthsquare() const;
+		float length_sqr() const;
+
+		vector4 to_vector4() const;
+
+		vector4 to_position4() const;
 
 	};
 

@@ -113,18 +113,18 @@ void testVector2()
 		<< "  dot(b,c) = " << dot(b, c) << "\n\n";
 
 	a = lerp(b, vector2::one, 0.5f);
-	std::cout << "  lerp(b,vector2::one, 0.5f) = <" << a[0] << "," << a[1] << "," << a[2] << ">\n";
+	std::cout << "  lerp(b,vector2::one, 0.5f) = <" << a[0] << "," << a[1] <<">\n";
 	a = lerp(b, vector2::one, 0.0f);
-	std::cout << "  lerp(b,vector2::one, 0.0f) = <" << a[0] << "," << a[1] << "," << a[2] << ">\n";
+	std::cout << "  lerp(b,vector2::one, 0.0f) = <" << a[0] << "," << a[1] << ">\n";
 	a = lerp(b, vector2::one, 1.0f);
-	std::cout << "  lerp(b,vector2::one, 1.0f) = <" << a[0] << "," << a[1] << "," << a[2] << ">\n\n";
+	std::cout << "  lerp(b,vector2::one, 1.0f) = <" << a[0] << "," << a[1] << ">\n\n";
 
 
 	a = max_combine(vector2(1, 2), vector2(3, 1));
-	std::cout << "  max_combine(<1,2,3>, <3,2,1>) = <" << a[0] << "," << a[1] << "," << a[2] << ">\n\n";
+	std::cout << "  max_combine(<1,2,3>, <3,2,1>) = <" << a[0] << "," << a[1] << ">\n\n";
 
 	a = min_combine(vector2(1, 3), vector2(3, 2));
-	std::cout << "  minx_combine(b,vector2::one, 1.0f) = <" << a[0] << "," << a[1] << "," << a[2] << ">\n\n";
+	std::cout << "  minx_combine(b,vector2::one, 1.0f) = <" << a[0] << "," << a[1] << ">\n\n";
 }
 
 void testMatrix44()

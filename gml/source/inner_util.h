@@ -1,6 +1,25 @@
 #pragma once
 
+#include "../include/vector2.h"
+#include "../include/vector3.h"
+#include "../include/vector4.h"
+
 namespace gml
 {
 	int get_float_exponent_base2(float d);
+
+	float raw_determinant(
+		float a00, float a01, 
+		float a10, float a11);
+
+	float raw_determinant(
+		float a00, float a01, float a02, 
+		float a10, float a11, float a12, 
+		float a20, float a21, float a22);
+
+	float raw_determinant(
+		float a00, float a01, float a02, float a03,
+		float a10, float a11, float a12, float a13,
+		float a20, float a21, float a22, float a23,
+		float a30, float a31, float a32, float a33);
 }

@@ -1,5 +1,6 @@
 #include "../include/matrix44.h"
 #include "../include/math_util.h"
+#include "inner_util.h"
 #include <cassert>
 
 namespace gml
@@ -45,7 +46,7 @@ namespace gml
 
 	const float& matrix44::operator[] (int index) const
 	{
-		assert(index >=0 && index < 16);
+		assert(index >= 0 && index < 16);
 		return *(&(m[0][0]) + index);
 	}
 
@@ -69,13 +70,21 @@ namespace gml
 
 	matrix44& matrix44::inverse()
 	{
+		float det = determinant();
+		if (!fequal(det, 0.0f))
+		{
+			//calc adjoint matrix 
+		}
+			
 		return *this;
 	}
 
 	float matrix44::determinant()
 	{
-		float result = 0.0f;
-		//result += m.m[0][0]
-		return result;
+		return raw_determinant(
+			_00, _01, _02, _03,
+			_10, _11, _12, _13,
+			_20, _21, _22, _23,
+			_30, _31, _32, _33);
 	}
 }

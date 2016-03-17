@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="include\math_util.h" />
     <ClInclude Include="include\matrix44.h" />
+    <ClInclude Include="include\swizzle.h" />
     <ClInclude Include="include\vector2.h" />
     <ClInclude Include="include\vector3.h" />
     <ClInclude Include="include\vector4.h" />

@@ -48,12 +48,6 @@ namespace gml
 		return *this;
 	}
 
-	vector3& vector3::operator=(const vector4& rhs)
-	{
-		set(rhs.x, rhs.y, rhs.z);
-		return *this;
-	}
-
 	bool vector3::operator==(const vector3& other) const
 	{
 		if (&other == this)
@@ -173,6 +167,12 @@ namespace gml
 		this->x = x;
 		this->y = y;
 		this->z = z;
+		return *this;
+	}
+
+	vector3& vector3::set(const vector4& rhs)
+	{
+		set(rhs.x, rhs.y, rhs.z);
 		return *this;
 	}
 

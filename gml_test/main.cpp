@@ -2,6 +2,7 @@
 #include <gml/include/vector2.h>
 #include <gml/include/matrix44.h>
 #include <gml/include/math_util.h>
+#include <gml/include/swizzle.h>
 #include <iostream>
 
 #pragma comment(lib, "gml.lib")
@@ -10,6 +11,7 @@ using namespace gml;
 void testVector3();
 void testVector2();
 void testMatrix44();
+void testSwizzle();
 
 int main()
 {
@@ -21,6 +23,9 @@ int main()
 
 	std::cout << "test matrix44 \n";
 	testMatrix44();
+
+	std::cout << "test swizzle \n";
+	testSwizzle();
 
 	getchar();
 	return 0;
@@ -174,4 +179,42 @@ void testMatrix44()
 		<< m._31 << ","
 		<< m._32 << ","
 		<< m._33 << "}\n";
+}
+
+void testSwizzle()
+{
+	vector2 a, vec2(2.1f, 2.2f);
+	vector3 b, vec3(3.1f, 3.2f, 3.3f);
+	vector4 c, vec4(4.1f, 4.2f, 4.3f, 4.4f);
+
+	std::cout << " vec2 : <" << vec2.x << ", " << vec2.y << ">\n";
+	std::cout << " vec3 : <" << vec3.x << ", " << vec3.y << ", " << vec3.z << ">\n";
+	std::cout << " vec4 : <" << vec4.x << ", " << vec4.y << ", " << vec4.z << ", " << vec4.w << ">\n";
+
+	//a = vec3;
+	a = vector2(vec3);
+
+	a = swizzle<y, x>(vec2);
+	std::cout << "  vec2 = vec2.yx : <" << a.x << ", " << a.y << ">\n";
+	a = swizzle<y, z>(vec3);
+	std::cout << "  vec2 = vec3.yz : <" << a.x << ", " << a.y << ">\n";
+	a = swizzle<w, w>(vec4);
+	std::cout << "  vec2 = vec4.ww : <" << a.x << ", " << a.y << ">\n\n";
+
+	//b = vec4;
+	b = vector3(vec4);
+
+	b = swizzle<y, x, y>(vec2);
+	std::cout << "  vec3 = vec2.yxy : <" << b.x << ", " << b.y << ", " << b.z << ">\n";
+	b = swizzle<y, z, x>(vec3);
+	std::cout << "  vec3 = vec3.yzx : <" << b.x << ", " << b.y << ", " << b.z << ">\n";
+	b = swizzle<w, w, x>(vec4);
+	std::cout << "  vec3 = vec4.wwx : <" << b.x << ", " << b.y << ", " << b.z << ">\n\n";
+
+	c = swizzle<y, x, x, y>(vec2);
+	std::cout << "  vec4 = vec2.yxxy : <" << c.x << ", " << c.y << ", " << c.z << ", " << c.w << ">\n";
+	c = swizzle<y, z, x, z>(vec3);
+	std::cout << "  vec4 = vec3.yzxz : <" << c.x << ", " << c.y << ", " << c.z << ", " << c.w << ">\n";
+	c = swizzle<z, z, w, y>(vec4);
+	std::cout << "  vec4 = vec4.zzwy : <" << c.x << ", " << c.y << ", " << c.z << ", " << c.w << ">\n\n";
 }

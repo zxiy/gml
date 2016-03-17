@@ -30,6 +30,9 @@
     <ClInclude Include="include\matrix44.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="include\swizzle.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\vector2.cpp">

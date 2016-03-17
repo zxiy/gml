@@ -3,6 +3,7 @@
 namespace gml
 {
 	int get_float_exponent_base2(float d);
+
 	bool fequal(float a, float b);
 
 	template<typename T>

@@ -1,5 +1,5 @@
-#include <gml/include/matrix44.h>
-#include <gml/include/math_util.h>
+#include "../include/matrix44.h"
+#include "../include/math_util.h"
 #include <cassert>
 
 namespace gml

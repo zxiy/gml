@@ -33,6 +33,9 @@
     <ClInclude Include="include\swizzle.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="source\inner_util.h">
+      <Filter>source</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\vector2.cpp">

@@ -1,6 +1,6 @@
-#include <gml/include/math_util.h>
-#include <gml/include/vector2.h>
-#include <gml/include/vector3.h>
+#include "../include/math_util.h"
+#include "../include/vector2.h"
+#include "../include/vector3.h"
 #include <cmath>
 #include <cassert>
 

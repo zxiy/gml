@@ -25,6 +25,7 @@
     <ClInclude Include="include\vector2.h" />
     <ClInclude Include="include\vector3.h" />
     <ClInclude Include="include\vector4.h" />
+    <ClInclude Include="source\inner_util.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\math_util.cpp" />

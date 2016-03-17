@@ -5,15 +5,12 @@
 
 namespace gml
 {
-
-
 	const matrix44 matrix44::I(
 		1.0f, 0.0f, 0.0f, 0.0f,
 		0.0f, 1.0f, 0.0f, 0.0f,
 		0.0f, 0.0f, 1.0f, 0.0f,
 		0.0f, 0.0f, 0.0f, 1.0f
 		);
-
 
 	matrix44::matrix44() {}
 
@@ -81,7 +78,7 @@ namespace gml
 
 	float matrix44::determinant()
 	{
-		return raw_determinant(
+		return determinant_impl(
 			_00, _01, _02, _03,
 			_10, _11, _12, _13,
 			_20, _21, _22, _23,

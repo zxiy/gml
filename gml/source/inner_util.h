@@ -8,16 +8,16 @@ namespace gml
 {
 	int get_float_exponent_base2(float d);
 
-	float raw_determinant(
+	float determinant_impl(
 		float a00, float a01, 
 		float a10, float a11);
 
-	float raw_determinant(
+	float determinant_impl(
 		float a00, float a01, float a02, 
 		float a10, float a11, float a12, 
 		float a20, float a21, float a22);
 
-	float raw_determinant(
+	float determinant_impl(
 		float a00, float a01, float a02, float a03,
 		float a10, float a11, float a12, float a13,
 		float a20, float a21, float a22, float a23,

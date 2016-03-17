@@ -163,7 +163,7 @@ namespace gml
 
 	const float& vector3::operator[](int index) const
 	{
-		assert(index >= 0 && index <= 3);
+		assert(index >= 0 && index < 3);
 		return *(&x + index);
 	}
 

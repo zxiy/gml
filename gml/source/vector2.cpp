@@ -156,7 +156,7 @@ namespace gml
 
 	const float& vector2::operator[](int index) const
 	{
-		assert(index >= 0 && index <= 2);
+		assert(index >= 0 && index < 2);
 		return *(&x + index);
 	}
 

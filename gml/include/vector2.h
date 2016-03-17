@@ -1,8 +1,9 @@
 #pragma once
 
-#include <gml/include/vector3.h>
 namespace gml
 {
+	class vector3;
+
 	class vector2
 	{
 	public:

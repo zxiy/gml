@@ -1,5 +1,6 @@
 #include <gml/include/math_util.h>
 #include <gml/include/vector2.h>
+#include <gml/include/vector3.h>
 #include <cmath>
 #include <cassert>
 
@@ -156,7 +157,7 @@ namespace gml
 
 	const float& vector2::operator[](int index) const
 	{
-		assert(index >= 0 && index <= 2);
+		assert(index >= 0 && index < 2);
 		return *(&x + index);
 	}
 

@@ -1,4 +1,5 @@
 #include <gml/include/vector3.h>
+#include <gml/include/vector4.h>
 #include <gml/include/math_util.h>
 #include <cmath>
 #include <cassert>
@@ -163,7 +164,7 @@ namespace gml
 
 	const float& vector3::operator[](int index) const
 	{
-		assert(index >= 0 && index <= 3);
+		assert(index >= 0 && index < 3);
 		return *(&x + index);
 	}
 

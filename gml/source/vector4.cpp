@@ -57,7 +57,7 @@ namespace gml
 
 	const float& vector4::operator[](int index) const
 	{
-		assert(index >= 0 && index <= 4);
+		assert(index >= 0 && index < 4);
 		return *(&x + index);
 	}
 

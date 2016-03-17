@@ -20,9 +20,9 @@ namespace gml
 	matrix44::matrix44(float _00, float _01, float _02, float _03, float _10, float _11, float _12, float _13, float _20, float _21, float _22, float _23, float _30, float _31, float _32, float _33)
 	{
 		this->_00 = _00;	this->_01 = _01;	this->_02 = _02;	this->_03 = _03;
-		this->_10 = _00;	this->_11 = _01;	this->_12 = _02;	this->_13 = _03;
-		this->_20 = _00;	this->_21 = _01;	this->_22 = _02;	this->_23 = _03;
-		this->_30 = _00;	this->_31 = _01;	this->_32 = _02;	this->_33 = _03;
+		this->_10 = _10;	this->_11 = _11;	this->_12 = _12;	this->_13 = _13;
+		this->_20 = _20;	this->_21 = _21;	this->_22 = _22;	this->_23 = _23;
+		this->_30 = _30;	this->_31 = _31;	this->_32 = _32;	this->_33 = _33;
 	}
 
 	matrix44::matrix44(const matrix44& other)

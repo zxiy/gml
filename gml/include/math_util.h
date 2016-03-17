@@ -10,4 +10,10 @@ namespace gml
 	{
 		return left * (1.0f - fac) + right * fac;
 	}
+
+	template<typename T>
+	inline void swap(T a, T b)
+	{
+		T tmp = a; a = b; b = tmp;
+	}
 }

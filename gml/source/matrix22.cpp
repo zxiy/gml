@@ -25,11 +25,51 @@ namespace gml
 
 	matrix22& matrix22::operator=(const matrix22& other)
 	{
-		for (int i = 0; i < 4; i++)
+		if (&other != this)
 		{
-			(*this)[i] = other[i];
+			for (int i = 0; i < 4; i++)
+			{
+				(*this)[i] = other[i];
+			}
 		}
 		return *this;
+	}
+
+	matrix22 matrix22::operator*(float scaler) const
+	{
+		matrix22 result(*this);
+		for (int i = 0; i < 4; i++)
+		{
+			result[i] *= scaler;
+		}
+		return result;
+	}
+
+	matrix22& matrix22::operator*=(float scaler)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			(*this)[i] *= scaler;
+		}
+		return *this;
+	}
+
+	bool matrix22::operator== (const matrix22& other) const
+	{
+		if (&other != this)
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				if ((*this)[i] != other[i])
+					return false;
+			}
+		}
+		return true;
+	}
+
+	bool matrix22::operator!= (const matrix22& other) const
+	{
+		return !(*this == other);
 	}
 
 	float& matrix22::operator[] (int index)
@@ -54,21 +94,39 @@ namespace gml
 		return *this;
 	}
 
-	matrix22& matrix22::inverse()
+	matrix22 matrix22::transposed() const
+	{
+		matrix22 result(*this);
+		result.transpose();
+		return result;
+	}
+
+	bool matrix22::inverse()
 	{
 		float det = determinant();
 		if (!fequal(det, 0.0f))
 		{
 			//calc adjoint matrix 
+			return true;
 		}
-
-		return *this;
+		return false;
 	}
 
-	float matrix22::determinant()
+	bool matrix22::is_orthogonal() const
+	{
+		//todo.
+		return false;
+	}
+
+	float matrix22::determinant() const
 	{
 		return determinant_impl(
 			_00, _01,
 			_10, _11);
+	}
+
+	matrix22 operator* (float scaler, const matrix22& rhs)
+	{
+		return rhs * scaler;
 	}
 }

@@ -23,6 +23,14 @@ namespace gml
 
 		matrix33& operator=(const matrix33& other);
 
+		matrix33 operator* (float scaler) const;
+
+		matrix33& operator*= (float scaler);
+
+		bool operator== (const matrix33& other) const;
+
+		bool operator!= (const matrix33& other) const;
+
 		float& operator[] (int index);
 
 		const float& operator[] (int index) const;
@@ -31,8 +39,14 @@ namespace gml
 
 		matrix33& transpose();
 
-		matrix33& inverse();
+		matrix33 transposed() const;
 
-		float determinant();
+		bool inverse();
+
+		bool is_orthogonal() const;
+
+		float determinant() const;
 	};
+
+	matrix33 operator* (float scaler, const matrix33& rhs);
 }

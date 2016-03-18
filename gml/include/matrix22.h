@@ -23,6 +23,14 @@ namespace gml
 
 		matrix22& operator=(const matrix22& other);
 
+		matrix22 operator* (float scaler) const;
+
+		matrix22& operator*= (float scaler);
+
+		bool operator== (const matrix22& other) const;
+
+		bool operator!= (const matrix22& other) const;
+
 		float& operator[] (int index);
 
 		const float& operator[] (int index) const;
@@ -31,8 +39,14 @@ namespace gml
 
 		matrix22& transpose();
 
-		matrix22& inverse();
+		matrix22 transposed() const;
 
-		float determinant();
+		bool inverse();
+
+		bool is_orthogonal() const;
+
+		float determinant() const;
 	};
+
+	matrix22 operator* (float scaler, const matrix22& rhs);
 }

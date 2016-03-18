@@ -34,6 +34,43 @@ namespace gml
 		return *this;
 	}
 
+	matrix33 matrix33::operator*(float scaler) const
+	{
+		matrix33 result(*this);
+		for (int i = 0; i < 4; i++)
+		{
+			result[i] *= scaler;
+		}
+		return result;
+	}
+
+	matrix33& matrix33::operator*=(float scaler)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			(*this)[i] *= scaler;
+		}
+		return *this;
+	}
+
+	bool matrix33::operator== (const matrix33& other) const
+	{
+		if (&other != this)
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				if ((*this)[i] != other[i])
+					return false;
+			}
+		}
+		return true;
+	}
+
+	bool matrix33::operator!= (const matrix33& other) const
+	{
+		return !(*this == other);
+	}
+
 	float& matrix33::operator[] (int index)
 	{
 		return const_cast<float&>(const_cast<const matrix33*>(this)->operator[](index));
@@ -60,22 +97,42 @@ namespace gml
 		return *this;
 	}
 
-	matrix33& matrix33::inverse()
+	matrix33 matrix33::transposed() const
+	{
+		matrix33 result(*this);
+		result.transpose();
+		return result;
+	}
+
+	bool matrix33::inverse()
 	{
 		float det = determinant();
 		if (!fequal(det, 0.0f))
 		{
 			//calc adjoint matrix 
+
+			return true;
 		}
 
-		return *this;
+		return false;
 	}
 
-	float matrix33::determinant()
+	bool matrix33::is_orthogonal() const
+	{
+		//todo.
+		return false;
+	}
+
+	float matrix33::determinant() const
 	{
 		return determinant_impl(
 			_00, _01, _02,
 			_10, _11, _12,
 			_20, _21, _22);
+	}
+
+	matrix33 operator* (float scaler, const matrix33& rhs)
+	{
+		return rhs * scaler;
 	}
 }

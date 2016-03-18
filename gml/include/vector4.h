@@ -36,4 +36,6 @@ namespace gml
 
 		vector4& replace(const vector3& vec);
 	};
+
+	float dot(const vector4& lhs, const vector4& rhs);
 }

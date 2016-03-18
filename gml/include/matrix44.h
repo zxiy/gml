@@ -25,7 +25,11 @@ namespace gml
 		
 		matrix44 operator* (float scaler) const;
 
+		matrix44 operator* (const matrix44& rhs) const;
+
 		matrix44& operator*= (float scaler);
+
+		matrix44& operator*=(const matrix44& rhs);
 
 		bool operator== (const matrix44& other) const;
 
@@ -34,6 +38,8 @@ namespace gml
 		float& operator[] (int index);
 
 		const float& operator[] (int index) const;
+
+		vector4 col(int index) const;
 
 		matrix44& identity();
 

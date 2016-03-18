@@ -27,7 +27,7 @@ namespace gml
 
 	matrix33& matrix33::operator=(const matrix33& other)
 	{
-		for (int i = 0; i < 16; i++)
+		for (int i = 0; i < 9; i++)
 		{
 			(*this)[i] = other[i];
 		}
@@ -44,12 +44,31 @@ namespace gml
 		return result;
 	}
 
+	matrix33 matrix33::operator*(const matrix33& rhs) const
+	{
+		matrix33 result;
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = 0; j < 3; j++)
+			{
+				result.m[i][j] = dot(row[i], rhs.col(j));
+			}
+		}
+		return result;
+	}
+
 	matrix33& matrix33::operator*=(float scaler)
 	{
 		for (int i = 0; i < 4; i++)
 		{
 			(*this)[i] *= scaler;
 		}
+		return *this;
+	}
+
+	matrix33& matrix33::operator*=(const matrix33& rhs)
+	{
+		*this = *this * rhs;
 		return *this;
 	}
 
@@ -82,6 +101,12 @@ namespace gml
 		return *(&(m[0][0]) + index);
 	}
 
+	vector3 matrix33::col(int index) const
+	{
+		assert(index >= 0 && index < 3);
+		return vector3(row[0][index], row[1][index], row[2][index]);
+	}
+
 	matrix33& matrix33::identity()
 	{
 		return *this = I;
@@ -109,7 +134,22 @@ namespace gml
 		float det = determinant();
 		if (!fequal(det, 0.0f))
 		{
-			//calc adjoint matrix 
+			det = 1.0f / det;
+			matrix33 copy(*this);
+
+			//to-do det_impl is calculated above in determinant().
+			//try to gcd
+			m[0][0] = +determinant_impl(copy._11, copy._12, copy._21, copy._22) * det;
+			m[1][0] = -determinant_impl(copy._10, copy._12, copy._20, copy._22) * det;
+			m[2][0] = +determinant_impl(copy._10, copy._11, copy._20, copy._21) * det;
+
+			m[0][1] = -determinant_impl(copy._01, copy._02, copy._21, copy._22) * det;
+			m[1][1] = +determinant_impl(copy._00, copy._02, copy._20, copy._22) * det;
+			m[2][1] = -determinant_impl(copy._00, copy._01, copy._20, copy._21) * det;
+
+			m[0][2] = +determinant_impl(copy._01, copy._02, copy._11, copy._12) * det;
+			m[1][2] = -determinant_impl(copy._00, copy._02, copy._10, copy._12) * det;
+			m[2][2] = +determinant_impl(copy._00, copy._01, copy._10, copy._11) * det;
 
 			return true;
 		}

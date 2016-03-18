@@ -46,12 +46,31 @@ namespace gml
 		return result;
 	}
 
+	matrix44 matrix44::operator*(const matrix44& rhs) const
+	{
+		matrix44 result;
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				result.m[i][j] = dot(row[i], rhs.col(j));
+			}
+		}
+		return result;
+	}
+
 	matrix44& matrix44::operator*=(float scaler)
 	{
 		for (int i = 0; i < 4; i++)
 		{
 			(*this)[i] *= scaler;
 		}
+		return *this;
+	}
+
+	matrix44& matrix44::operator*=(const matrix44& rhs)
+	{
+		(*this) = *this * rhs;
 		return *this;
 	}
 
@@ -84,6 +103,12 @@ namespace gml
 		return *(&(m[0][0]) + index);
 	}
 
+	vector4 matrix44::col(int index) const
+	{
+		assert(index >= 0 && index < 4);
+		return vector4(row[0][index], row[1][index], row[2][index], row[3][index]);
+	}
+
 	matrix44& matrix44::identity()
 	{
 		return *this = I;
@@ -114,7 +139,30 @@ namespace gml
 		float det = determinant();
 		if (!fequal(det, 0.0f))
 		{
-			//calc adjoint matrix 
+			det = 1.0f / det;
+			matrix44 copy(*this);
+
+			//to-do det_impl is calculated above in determinant().
+			//try to gcd
+			m[0][0] = +determinant_impl(copy._11, copy._12, copy._13, copy._21, copy._22, copy._23, copy._31, copy._32, copy._33) * det;
+			m[1][0] = -determinant_impl(copy._10, copy._12, copy._13, copy._20, copy._22, copy._23, copy._30, copy._32, copy._33) * det;
+			m[2][0] = +determinant_impl(copy._10, copy._11, copy._13, copy._20, copy._21, copy._23, copy._30, copy._31, copy._33) * det;
+			m[3][0] = -determinant_impl(copy._10, copy._11, copy._12, copy._20, copy._21, copy._22, copy._30, copy._31, copy._32) * det;
+
+			m[0][1] = -determinant_impl(copy._01, copy._02, copy._03, copy._21, copy._22, copy._23, copy._31, copy._32, copy._33) * det;
+			m[1][1] = +determinant_impl(copy._00, copy._02, copy._03, copy._20, copy._22, copy._23, copy._30, copy._32, copy._33) * det;
+			m[2][1] = -determinant_impl(copy._00, copy._01, copy._03, copy._20, copy._21, copy._23, copy._30, copy._31, copy._33) * det;
+			m[3][1] = +determinant_impl(copy._00, copy._01, copy._02, copy._20, copy._21, copy._22, copy._30, copy._31, copy._32) * det;
+
+			m[0][2] = +determinant_impl(copy._01, copy._02, copy._03, copy._11, copy._12, copy._13, copy._31, copy._32, copy._33) * det;
+			m[1][2] = -determinant_impl(copy._00, copy._02, copy._03, copy._10, copy._12, copy._13, copy._30, copy._32, copy._33) * det;
+			m[2][2] = +determinant_impl(copy._00, copy._01, copy._03, copy._10, copy._11, copy._13, copy._30, copy._31, copy._33) * det;
+			m[3][2] = -determinant_impl(copy._00, copy._01, copy._02, copy._10, copy._11, copy._12, copy._30, copy._31, copy._32) * det;
+
+			m[0][3] = -determinant_impl(copy._01, copy._02, copy._03, copy._11, copy._12, copy._13, copy._21, copy._22, copy._23) * det;
+			m[1][3] = +determinant_impl(copy._00, copy._02, copy._03, copy._10, copy._12, copy._13, copy._20, copy._22, copy._23) * det;
+			m[2][3] = -determinant_impl(copy._00, copy._01, copy._03, copy._10, copy._11, copy._13, copy._20, copy._21, copy._23) * det;
+			m[3][3] = +determinant_impl(copy._00, copy._01, copy._02, copy._10, copy._11, copy._12, copy._20, copy._21, copy._22) * det;
 
 			return true;
 		}

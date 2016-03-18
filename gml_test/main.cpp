@@ -1,31 +1,46 @@
-#include <gml/include/vector3.h>
 #include <gml/include/vector2.h>
-#include <gml/include/matrix44.h>
+#include <gml/include/vector3.h>
+#include <gml/include/vector4.h>
 #include <gml/include/math_util.h>
 #include <gml/include/swizzle.h>
+#include <gml/include/matrix22.h>
+#include <gml/include/matrix33.h>
+#include <gml/include/matrix44.h>
 #include <iostream>
 
 #pragma comment(lib, "gml.lib")
 using namespace gml;
 
-void testVector3();
 void testVector2();
-void testMatrix44();
+void testVector3();
+void testVector4();
 void testSwizzle();
+void testMatrix22();
+void testMatrix33();
+void testMatrix44();
 
 int main()
 {
-	std::cout << "test vector3 \n";
-	testVector3();
-
 	std::cout << "test vector2 \n";
 	testVector2();
 
-	std::cout << "test matrix44 \n";
-	testMatrix44();
+	std::cout << "test vector3 \n";
+	testVector3();
+
+	std::cout << "test vector4 \n";
+	testVector4();
 
 	std::cout << "test swizzle \n";
 	testSwizzle();
+
+	std::cout << "test matrix22 \n";
+	testMatrix22();
+
+	std::cout << "test matrix33 \n";
+	testMatrix33();
+
+	std::cout << "test matrix44 \n";
+	testMatrix44();
 
 	getchar();
 	return 0;
@@ -118,7 +133,7 @@ void testVector2()
 		<< "  dot(b,c) = " << dot(b, c) << "\n\n";
 
 	a = lerp(b, vector2::one, 0.5f);
-	std::cout << "  lerp(b,vector2::one, 0.5f) = <" << a[0] << "," << a[1] <<">\n";
+	std::cout << "  lerp(b,vector2::one, 0.5f) = <" << a[0] << "," << a[1] << ">\n";
 	a = lerp(b, vector2::one, 0.0f);
 	std::cout << "  lerp(b,vector2::one, 0.0f) = <" << a[0] << "," << a[1] << ">\n";
 	a = lerp(b, vector2::one, 1.0f);
@@ -178,7 +193,35 @@ void testMatrix44()
 		<< m._30 << ","
 		<< m._31 << ","
 		<< m._32 << ","
-		<< m._33 << "}\n";
+		<< m._33 << "}\n\n";
+
+	matrix44 a(-4, -3, 3, 0, 0, 2, -2, 0, 1, 4, -1, 0, 1, 2, 50, 1);
+	matrix44 b(a);
+
+	std::cout << a[0] << "," << a[1] << "," << a[2] << "," << a[3] << "\n"
+		<< a[4] << "," << a[5] << "," << a[6] << "," << a[7] << "\n"
+		<< a[8] << "," << a[9] << "," << a[10] << "," << a[11] << "\n"
+		<< a[12] << "," << a[13] << "," << a[14] << "," << a[15] << "\n\n";
+
+	//a.transpose();
+	std::cout << "can inverse = " << a.inverse() << "\n";
+
+	std::cout << a[0] << "," << a[1] << "," << a[2] << "," << a[3] << "\n"
+		<< a[4] << "," << a[5] << "," << a[6] << "," << a[7] << "\n"
+		<< a[8] << "," << a[9] << "," << a[10] << "," << a[11] << "\n"
+		<< a[12] << "," << a[13] << "," << a[14] << "," << a[15] << "\n\n";
+
+	a = a * b;
+
+	std::cout << a[0] << "," << a[1] << "," << a[2] << "," << a[3] << "\n"
+		<< a[4] << "," << a[5] << "," << a[6] << "," << a[7] << "\n"
+		<< a[8] << "," << a[9] << "," << a[10] << "," << a[11] << "\n"
+		<< a[12] << "," << a[13] << "," << a[14] << "," << a[15] << "\n\n";
+}
+
+void testVector4()
+{
+
 }
 
 void testSwizzle()
@@ -217,4 +260,44 @@ void testSwizzle()
 	std::cout << "  vec4 = vec3.yzxz : <" << c.x << ", " << c.y << ", " << c.z << ", " << c.w << ">\n";
 	c = swizzle<z, z, w, y>(vec4);
 	std::cout << "  vec4 = vec4.zzwy : <" << c.x << ", " << c.y << ", " << c.z << ", " << c.w << ">\n\n";
+}
+
+void testMatrix22()
+{
+	const float r = 0.5f;
+	matrix22 a(cos(r), -sin(r), sin(r), cos(r));
+	matrix22 b(a);
+
+	std::cout << a[0] << "," << a[1] << "\n" << a[2] << "," << a[3] << "\n\n";
+
+	std::cout << "can inverse = " << a.inverse() << "\n";
+
+	std::cout << a[0] << "," << a[1] << "\n" << a[2] << "," << a[3] << "\n\n";
+
+	a = a * b;
+
+	std::cout << a[0] << "," << a[1] << "," << a[2] << "," << a[3] << "\n\n";
+}
+
+void testMatrix33()
+{
+	matrix33 a(-4, -3, 3, 0, 2, -2, 1, 4, -1);
+	matrix33 b(a);
+
+	std::cout << a[0] << "," << a[1] << "," << a[2] << "\n"
+		<< a[3] << "," << a[4] << "," << a[5] << "\n"
+		<< a[6] << "," << a[7] << "," << a[8] << "\n\n";
+
+	//a.transpose();
+	std::cout << "can inverse = " << a.inverse() << "\n";
+
+	std::cout << a[0] << "," << a[1] << "," << a[2] << "\n"
+		<< a[3] << "," << a[4] << "," << a[5] << "\n"
+		<< a[6] << "," << a[7] << "," << a[8] << "\n\n";
+
+	a = a * b;
+
+	std::cout << a[0] << "," << a[1] << "," << a[2] << "\n"
+		<< a[3] << "," << a[4] << "," << a[5] << "\n"
+		<< a[6] << "," << a[7] << "," << a[8] << "\n\n";
 }

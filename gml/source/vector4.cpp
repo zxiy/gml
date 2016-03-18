@@ -82,4 +82,9 @@ namespace gml
 		this->z = vec.z;
 		return *this;
 	}
+
+	float dot(const vector4& lhs, const vector4& rhs)
+	{
+		return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z + lhs.w * rhs.w;
+	}
 }

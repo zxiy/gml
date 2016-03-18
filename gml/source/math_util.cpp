@@ -34,12 +34,12 @@ namespace gml
 		float a10, float a11, float a12,
 		float a20, float a21, float a22)
 	{
-		return a00 * a11 * a22
-			+ a01 * a12 * a20
-			+ a02 * a10 * a21
-			- a00 * a12 * a21
-			- a01 * a10 * a22
-			- a02 * a11 * a20;
+		return a00 * determinant_impl(a11, a12,
+									a21, a22)
+			- a01 * determinant_impl(a10, a12,
+									a20, a22)
+			+ a02 * determinant_impl(a10, a11,
+								a20, a21);
 	}
 
 	float determinant_impl(
@@ -49,19 +49,19 @@ namespace gml
 		float a30, float a31, float a32, float a33)
 	{
 		return a00 * determinant_impl(a11, a12, a13,
-								 a21, a22, a23,
-								 a31, a32, a33)
+									a21, a22, a23,
+									a31, a32, a33)
 
 			- a01 * determinant_impl(a10, a12, a13,
-								a20, a22, a23,
-								a30, a32, a33)
+									a20, a22, a23,
+									a30, a32, a33)
 
 			+ a02 * determinant_impl(a10, a11, a13,
-								a20, a21, a23,
-								a30, a31, a33)
+									a20, a21, a23,
+									a30, a31, a33)
 
 			- a03 * determinant_impl(a10, a11, a12,
-								a20, a21, a22,
-								a30, a31, a32);
+									a20, a21, a22,
+									a30, a31, a32);
 	}
 }

@@ -45,6 +45,19 @@ namespace gml
 		return result;
 	}
 
+	matrix22 matrix22::operator*(const matrix22& rhs) const
+	{
+		matrix22 result;
+		for (int i = 0; i < 2; i++)
+		{
+			for (int j = 0; j < 2; j++)
+			{
+				result.m[i][j] = dot(row[i], rhs.col(j));
+			}
+		}
+		return result;
+	}
+
 	matrix22& matrix22::operator*=(float scaler)
 	{
 		for (int i = 0; i < 4; i++)
@@ -53,6 +66,13 @@ namespace gml
 		}
 		return *this;
 	}
+
+	matrix22& matrix22::operator*=(const matrix22& rhs)
+	{
+		(*this) = *this * rhs;
+		return *this;
+	}
+	
 
 	bool matrix22::operator== (const matrix22& other) const
 	{
@@ -83,6 +103,12 @@ namespace gml
 		return *(&(m[0][0]) + index);
 	}
 
+	vector2 matrix22::col(int index) const
+	{
+		assert(index >= 0 && index < 2);
+		return vector2(row[0][index], row[1][index]);
+	}
+
 	matrix22& matrix22::identity()
 	{
 		return *this = I;
@@ -107,6 +133,11 @@ namespace gml
 		if (!fequal(det, 0.0f))
 		{
 			//calc adjoint matrix 
+			swap(this->m[0][0], this->m[1][1]);
+			this->m[0][1] = fequal(this->m[0][1], 0.0f) ? 0.0f : -this->m[0][1];
+			this->m[1][0] = fequal(this->m[1][0], 0.0f) ? 0.0f : -this->m[1][0];
+
+			*this *= 1.0f / det;
 			return true;
 		}
 		return false;

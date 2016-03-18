@@ -3,6 +3,19 @@
 
 namespace gml
 {
+	static const float a2r_factor = static_cast<float>(PI / 180.0);
+	static const float r2a_factor = 1.0f / a2r_factor;
+
+	float a2r(float angle)
+	{
+		return angle * a2r_factor;
+	}
+
+	float r2a(float raian)
+	{
+		return raian * a2r_factor;
+	}
+
 	bool fequal(float a, float b)
 	{
 		if (a == b)
@@ -35,11 +48,11 @@ namespace gml
 		float a20, float a21, float a22)
 	{
 		return a00 * determinant_impl(a11, a12,
-									a21, a22)
+			a21, a22)
 			- a01 * determinant_impl(a10, a12,
-									a20, a22)
+				a20, a22)
 			+ a02 * determinant_impl(a10, a11,
-								a20, a21);
+				a20, a21);
 	}
 
 	float determinant_impl(
@@ -49,19 +62,19 @@ namespace gml
 		float a30, float a31, float a32, float a33)
 	{
 		return a00 * determinant_impl(a11, a12, a13,
-									a21, a22, a23,
-									a31, a32, a33)
+			a21, a22, a23,
+			a31, a32, a33)
 
 			- a01 * determinant_impl(a10, a12, a13,
-									a20, a22, a23,
-									a30, a32, a33)
+				a20, a22, a23,
+				a30, a32, a33)
 
 			+ a02 * determinant_impl(a10, a11, a13,
-									a20, a21, a23,
-									a30, a31, a33)
+				a20, a21, a23,
+				a30, a31, a33)
 
 			- a03 * determinant_impl(a10, a11, a12,
-									a20, a21, a22,
-									a30, a31, a32);
+				a20, a21, a22,
+				a30, a31, a32);
 	}
 }

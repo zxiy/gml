@@ -59,4 +59,6 @@ namespace gml
 	matrix22 operator* (float scaler, const matrix22& rhs);
 
 	vector2 operator* (const vector2& lhs, const matrix22& rhs);
+
+	matrix22 rotate(float radian);
 }

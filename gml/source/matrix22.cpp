@@ -2,6 +2,7 @@
 #include "../include/math_util.h"
 #include "inner_util.h"
 #include <cassert>
+#include <cmath>
 
 namespace gml
 {
@@ -194,5 +195,12 @@ namespace gml
 			result[i] = dot(lhs, rhs.col(i));
 		}
 		return result;
+	}
+
+	matrix22 rotate(float radian)
+	{
+		float cosr = cosf(radian);
+		float sinr = sinf(radian);
+		return matrix22(cosr, -sinr, sinr, cosr);
 	}
 }

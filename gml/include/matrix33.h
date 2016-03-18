@@ -27,6 +27,8 @@ namespace gml
 
 		matrix33 operator* (const matrix33& rhs) const;
 
+		vector3 operator* (const vector3& rhs) const;
+
 		matrix33& operator*= (float scaler);
 
 		matrix33& operator*=(const matrix33& rhs);
@@ -55,4 +57,6 @@ namespace gml
 	};
 
 	matrix33 operator* (float scaler, const matrix33& rhs);
+
+	vector3 operator* (const vector3& lhs, const matrix33& rhs);
 }

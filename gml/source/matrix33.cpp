@@ -51,6 +51,16 @@ namespace gml
 		return result;
 	}
 
+	vector3 matrix33::operator* (const vector3& rhs) const
+	{
+		vector3 result;
+		for (int i = 0; i < 3; i++)
+		{
+			result[i] = dot(row[i], rhs);
+		}
+		return result;
+	}
+
 	matrix33& matrix33::operator*=(float scaler)
 	{
 		for (int i = 0; i < 4; i++)
@@ -192,5 +202,15 @@ namespace gml
 	matrix33 operator* (float scaler, const matrix33& rhs)
 	{
 		return rhs * scaler;
+	}
+
+	vector3 operator* (const vector3& lhs, const matrix33& rhs)
+	{
+		vector3 result;
+		for (int i = 0; i < 3; i++)
+		{
+			result[i] = dot(lhs, rhs.col(i));
+		}
+		return result;
 	}
 }

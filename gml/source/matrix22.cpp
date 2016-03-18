@@ -49,6 +49,16 @@ namespace gml
 		return result;
 	}
 
+	vector2 matrix22::operator* (const vector2& rhs) const
+	{
+		vector2 result;
+		for (int i = 0; i < 2; i++)
+		{
+			result[i] = dot(row[i], rhs);
+		}
+		return result;
+	}
+
 	matrix22& matrix22::operator*=(float scaler)
 	{
 		for (int i = 0; i < 4; i++)
@@ -70,7 +80,7 @@ namespace gml
 		}
 		return *this;
 	}
-	
+
 	bool matrix22::operator== (const matrix22& rhs) const
 	{
 		if (&rhs != this)
@@ -174,5 +184,15 @@ namespace gml
 	matrix22 operator* (float scaler, const matrix22& rhs)
 	{
 		return rhs * scaler;
+	}
+
+	vector2 operator* (const vector2& lhs, const matrix22& rhs)
+	{
+		vector2 result;
+		for (int i = 0; i < 2; i++)
+		{
+			result[i] = dot(lhs, rhs.col(i));
+		}
+		return result;
 	}
 }

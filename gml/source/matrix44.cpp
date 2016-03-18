@@ -50,6 +50,16 @@ namespace gml
 		return result;
 	}
 
+	vector4 matrix44::operator* (const vector4& rhs) const
+	{
+		vector4 result;
+		for (int i = 0; i < 4; i++)
+		{
+			result[i] = dot(row[i], rhs);
+		}
+		return result;
+	}
+
 	matrix44& matrix44::operator*=(float scaler)
 	{
 		for (int i = 0; i < 4; i++)
@@ -180,5 +190,15 @@ namespace gml
 	matrix44 operator* (float scaler, const matrix44& rhs)
 	{
 		return rhs * scaler;
+	}
+
+	vector4 operator* (const vector4& lhs, const matrix44& rhs)
+	{
+		vector4 result;
+		for (int i = 0; i < 4; i++)
+		{
+			result[i] = dot(lhs, rhs.col(i));
+		}
+		return result;
 	}
 }

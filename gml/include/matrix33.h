@@ -21,19 +21,19 @@ namespace gml
 
 		matrix33(const matrix33& other);
 
-		matrix33& operator=(const matrix33& other);
+		matrix33& operator=(const matrix33& rhs);
 
 		matrix33 operator* (float scaler) const;
 
-		matrix33 operator* (const matrix33& other) const;
+		matrix33 operator* (const matrix33& rhs) const;
 
 		matrix33& operator*= (float scaler);
 
-		matrix33& operator*=(const matrix33& other);
+		matrix33& operator*=(const matrix33& rhs);
 
-		bool operator== (const matrix33& other) const;
+		bool operator== (const matrix33& rhs) const;
 
-		bool operator!= (const matrix33& other) const;
+		bool operator!= (const matrix33& rhs) const;
 
 		float& operator[] (int index);
 

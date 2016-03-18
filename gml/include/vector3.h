@@ -28,17 +28,17 @@ namespace gml
 
 		vector3(float x, float y, float z);
 
-		vector3(const vector3& rhs);
+		vector3(const vector3& other);
 
-		explicit vector3(const vector4& rhs);
+		explicit vector3(const vector4& vec4);
 
 		vector3 operator-() const;
 
 		vector3& operator=(const vector3& rhs);
 
-		bool operator==(const vector3& other) const;
+		bool operator==(const vector3& rhs) const;
 
-		bool operator!=(const vector3& other) const;
+		bool operator!=(const vector3& rhs) const;
 
 		vector3 operator+(float value) const;
 
@@ -71,7 +71,7 @@ namespace gml
 
 		vector3& set(float x, float y, float z);
 
-		vector3& set(const vector4& rhs);
+		vector3& set(const vector4& vec4);
 
 		vector3 normalized() const;
 

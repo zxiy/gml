@@ -17,13 +17,13 @@ namespace gml
 
 		vector4(float x, float y, float z, float w);
 
-		vector4(const vector4& rhs);
+		vector4(const vector4& other);
 
 		vector4& operator=(const vector4& rhs);
 
-		bool operator==(const vector4& other) const;
+		bool operator==(const vector4& rhs) const;
 
-		bool operator!=(const vector4& other) const;
+		bool operator!=(const vector4& rhs) const;
 
 		//hack
 		float& operator[](int index);
@@ -34,7 +34,7 @@ namespace gml
 
 		vector4& set(float x, float y, float z, float w);
 
-		vector4& replace(const vector3& vec);
+		vector4& replace(const vector3& vec3);
 	};
 
 	float dot(const vector4& lhs, const vector4& rhs);

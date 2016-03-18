@@ -39,23 +39,14 @@ namespace gml
 	matrix44 matrix44::operator*(float scaler) const
 	{
 		matrix44 result(*this);
-		for (int i = 0; i < 4; i++)
-		{
-			result[i] *= scaler;
-		}
+		result *= scaler;
 		return result;
 	}
 
 	matrix44 matrix44::operator*(const matrix44& rhs) const
 	{
-		matrix44 result;
-		for (int i = 0; i < 4; i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				result.m[i][j] = dot(row[i], rhs.col(j));
-			}
-		}
+		matrix44 result(*this);
+		result *= rhs;
 		return result;
 	}
 
@@ -70,7 +61,14 @@ namespace gml
 
 	matrix44& matrix44::operator*=(const matrix44& rhs)
 	{
-		(*this) = *this * rhs;
+		matrix44 copy(*this);
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				m[i][j] = dot(copy.row[i], rhs.col(j));
+			}
+		}
 		return *this;
 	}
 
@@ -167,12 +165,6 @@ namespace gml
 			return true;
 		}
 			
-		return false;
-	}
-
-	bool matrix44::is_orthogonal() const
-	{
-		//todo.
 		return false;
 	}
 

@@ -21,7 +21,7 @@ namespace gml
 
 		matrix44(const matrix44& other);
 
-		matrix44& operator=(const matrix44& other);
+		matrix44& operator=(const matrix44& rhs);
 		
 		matrix44 operator* (float scaler) const;
 
@@ -31,9 +31,9 @@ namespace gml
 
 		matrix44& operator*=(const matrix44& rhs);
 
-		bool operator== (const matrix44& other) const;
+		bool operator== (const matrix44& rhs) const;
 
-		bool operator!= (const matrix44& other) const;
+		bool operator!= (const matrix44& rhs) const;
 
 		float& operator[] (int index);
 
@@ -48,8 +48,6 @@ namespace gml
 		matrix44 transposed() const;
 
 		bool inverse();
-
-		bool is_orthogonal() const;
 
 		float determinant() const;
 	};

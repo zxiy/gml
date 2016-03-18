@@ -268,15 +268,35 @@ void testMatrix22()
 	matrix22 a(cos(r), -sin(r), sin(r), cos(r));
 	matrix22 b(a);
 
-	std::cout << a[0] << "," << a[1] << "\n" << a[2] << "," << a[3] << "\n\n";
+	std::cout << "  a = \n  |"
+		<< a[0] << "," << a[1] << "|\n  |"
+		<< a[2] << "," << a[3] << "| is"
+		<< (a.is_orthogonal() ? " " : " not ")
+		<< "orthogonal\n\n";
 
-	std::cout << "can inverse = " << a.inverse() << "\n";
+	a._11 += 20.0f;
+	std::cout << "  a = \n  |"
+		<< a[0] << "," << a[1] << "|\n  |"
+		<< a[2] << "," << a[3] << "| is"
+		<< (a.is_orthogonal() ? " " : " not ")
+		<< "orthogonal\n\n";
 
-	std::cout << a[0] << "," << a[1] << "\n" << a[2] << "," << a[3] << "\n\n";
+	b = a;
+	std::cout << "  a can"
+		<<( a.inverse()? " " : " not ")
+		<<"inverse.\n\n";
+
+	
+	std::cout << "  a.inv =\n  |"
+		<< a[0] << "," << a[1] << "|\n  |"
+		<< a[2] << "," << a[3] << "|\n\n";
 
 	a = a * b;
 
-	std::cout << a[0] << "," << a[1] << "," << a[2] << "," << a[3] << "\n\n";
+	std::cout <<"  a * b =\n"
+		<< "  |"
+		<< a[0] << "," << a[1] << "|\n  |"
+		<< a[2] << "," << a[3] << "|\n\n";
 }
 
 void testMatrix33()

@@ -12,9 +12,9 @@ namespace gml
 		set(x, y, z, w);
 	}
 
-	vector4::vector4(const vector4& rhs)
+	vector4::vector4(const vector4& other)
 	{
-		set(rhs.x, rhs.y, rhs.z, rhs.w);
+		set(other.x, other.y, other.z, other.w);
 	}
 
 	vector4& vector4::operator=(const vector4& rhs)
@@ -26,27 +26,20 @@ namespace gml
 		return *this;
 	}
 
-	bool vector4::operator==(const vector4& other) const
+	bool vector4::operator==(const vector4& rhs) const
 	{
-		if (&other == this)
+		if (&rhs == this)
 			return true;
 
-		return fequal(x, other.x) &&
-			fequal(y, other.y) &&
-			fequal(z, other.z) &&
-			fequal(w, other.w);
+		return fequal(x, rhs.x) &&
+			fequal(y, rhs.y) &&
+			fequal(z, rhs.z) &&
+			fequal(w, rhs.w);
 	}
 
-	bool vector4::operator!=(const vector4& other) const
+	bool vector4::operator!=(const vector4& rhs) const
 	{
-		if (&other == this)
-			return false;
-
-		return !fequal(x, other.x) ||
-			!fequal(y, other.y) ||
-			!fequal(z, other.z) ||
-			!fequal(w, other.w);
-
+		return !(*this == rhs);
 	}
 
 	//hack
@@ -75,11 +68,11 @@ namespace gml
 		return *this;
 	}
 
-	vector4& vector4::replace(const vector3& vec)
+	vector4& vector4::replace(const vector3& vec3)
 	{
-		this->x = vec.x;
-		this->y = vec.y;
-		this->z = vec.z;
+		this->x = vec3.x;
+		this->y = vec3.y;
+		this->z = vec3.z;
 		return *this;
 	}
 

@@ -24,17 +24,17 @@ namespace gml
 
 		vector2(float x, float y);
 
-		vector2(const vector2& rhs);
+		vector2(const vector2& other);
 
-		explicit vector2(const vector3& rhs);
+		explicit vector2(const vector3& vec3);
 
 		vector2 operator-() const;
 
 		vector2& operator=(const vector2& rhs);
 
-		bool operator==(const vector2& other) const;
+		bool operator==(const vector2& rhs) const;
 
-		bool operator!=(const vector2& other) const;
+		bool operator!=(const vector2& rhs) const;
 
 		vector2 operator+(float value) const;
 		

@@ -21,7 +21,7 @@ namespace gml
 
 		matrix22(const matrix22& other);
 
-		matrix22& operator=(const matrix22& other);
+		matrix22& operator=(const matrix22& rhs);
 
 		matrix22 operator* (float scaler) const;
 
@@ -31,9 +31,9 @@ namespace gml
 
 		matrix22& operator*=(const matrix22& rhs);
 
-		bool operator== (const matrix22& other) const;
+		bool operator== (const matrix22& rhs) const;
 
-		bool operator!= (const matrix22& other) const;
+		bool operator!= (const matrix22& rhs) const;
 
 		float& operator[] (int index);
 

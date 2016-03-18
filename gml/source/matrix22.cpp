@@ -23,13 +23,13 @@ namespace gml
 		*this = other;
 	}
 
-	matrix22& matrix22::operator=(const matrix22& other)
+	matrix22& matrix22::operator=(const matrix22& rhs)
 	{
-		if (&other != this)
+		if (&rhs != this)
 		{
 			for (int i = 0; i < 4; i++)
 			{
-				(*this)[i] = other[i];
+				(*this)[i] = rhs[i];
 			}
 		}
 		return *this;
@@ -38,23 +38,14 @@ namespace gml
 	matrix22 matrix22::operator*(float scaler) const
 	{
 		matrix22 result(*this);
-		for (int i = 0; i < 4; i++)
-		{
-			result[i] *= scaler;
-		}
+		result *= scaler;
 		return result;
 	}
 
 	matrix22 matrix22::operator*(const matrix22& rhs) const
 	{
-		matrix22 result;
-		for (int i = 0; i < 2; i++)
-		{
-			for (int j = 0; j < 2; j++)
-			{
-				result.m[i][j] = dot(row[i], rhs.col(j));
-			}
-		}
+		matrix22 result(*this);
+		result *= rhs;
 		return result;
 	}
 
@@ -69,27 +60,33 @@ namespace gml
 
 	matrix22& matrix22::operator*=(const matrix22& rhs)
 	{
-		(*this) = *this * rhs;
+		matrix22 copy(*this);
+		for (int i = 0; i < 2; i++)
+		{
+			for (int j = 0; j < 2; j++)
+			{
+				m[i][j] = dot(copy.row[i], rhs.col(j));
+			}
+		}
 		return *this;
 	}
 	
-
-	bool matrix22::operator== (const matrix22& other) const
+	bool matrix22::operator== (const matrix22& rhs) const
 	{
-		if (&other != this)
+		if (&rhs != this)
 		{
 			for (int i = 0; i < 4; i++)
 			{
-				if ((*this)[i] != other[i])
+				if ((*this)[i] != rhs[i])
 					return false;
 			}
 		}
 		return true;
 	}
 
-	bool matrix22::operator!= (const matrix22& other) const
+	bool matrix22::operator!= (const matrix22& rhs) const
 	{
-		return !(*this == other);
+		return !(*this == rhs);
 	}
 
 	float& matrix22::operator[] (int index)
@@ -129,13 +126,19 @@ namespace gml
 
 	bool matrix22::inverse()
 	{
+		if (is_orthogonal())
+		{
+			transpose();
+			return true;
+		}
+
 		float det = determinant();
 		if (!fequal(det, 0.0f))
 		{
 			//calc adjoint matrix 
 			swap(this->m[0][0], this->m[1][1]);
-			this->m[0][1] = fequal(this->m[0][1], 0.0f) ? 0.0f : -this->m[0][1];
-			this->m[1][0] = fequal(this->m[1][0], 0.0f) ? 0.0f : -this->m[1][0];
+			this->m[0][1] = -this->m[0][1];
+			this->m[1][0] = -this->m[1][0];
 
 			*this *= 1.0f / det;
 			return true;
@@ -145,8 +148,20 @@ namespace gml
 
 	bool matrix22::is_orthogonal() const
 	{
-		//todo.
-		return false;
+		for (int i = 0; i < 2; i++)
+		{
+			if (!fequal(row[i].length_sqr(), 1.0f))
+			{
+				return false;
+			}
+
+			for (int j = i + 1; j < 2; j++)
+			{
+				if (!fequal(dot(row[i], row[j]), 0.0f))
+					return false;
+			}
+		}
+		return true;
 	}
 
 	float matrix22::determinant() const

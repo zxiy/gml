@@ -25,11 +25,14 @@ namespace gml
 		*this = other;
 	}
 
-	matrix33& matrix33::operator=(const matrix33& other)
+	matrix33& matrix33::operator=(const matrix33& rhs)
 	{
-		for (int i = 0; i < 9; i++)
+		if (&rhs != this)
 		{
-			(*this)[i] = other[i];
+			for (int i = 0; i < 9; i++)
+			{
+				(*this)[i] = rhs[i];
+			}
 		}
 		return *this;
 	}
@@ -37,23 +40,14 @@ namespace gml
 	matrix33 matrix33::operator*(float scaler) const
 	{
 		matrix33 result(*this);
-		for (int i = 0; i < 4; i++)
-		{
-			result[i] *= scaler;
-		}
+		result *= scaler;
 		return result;
 	}
 
 	matrix33 matrix33::operator*(const matrix33& rhs) const
 	{
-		matrix33 result;
-		for (int i = 0; i < 3; i++)
-		{
-			for (int j = 0; j < 3; j++)
-			{
-				result.m[i][j] = dot(row[i], rhs.col(j));
-			}
-		}
+		matrix33 result(*this);
+		result *= rhs;
 		return result;
 	}
 
@@ -68,26 +62,33 @@ namespace gml
 
 	matrix33& matrix33::operator*=(const matrix33& rhs)
 	{
-		*this = *this * rhs;
+		matrix33 copy(*this);
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = 0; j < 3; j++)
+			{
+				m[i][j] = dot(copy.row[i], rhs.col(j));
+			}
+		}
 		return *this;
 	}
 
-	bool matrix33::operator== (const matrix33& other) const
+	bool matrix33::operator== (const matrix33& rhs) const
 	{
-		if (&other != this)
+		if (&rhs != this)
 		{
 			for (int i = 0; i < 4; i++)
 			{
-				if ((*this)[i] != other[i])
+				if ((*this)[i] != rhs[i])
 					return false;
 			}
 		}
 		return true;
 	}
 
-	bool matrix33::operator!= (const matrix33& other) const
+	bool matrix33::operator!= (const matrix33& rhs) const
 	{
-		return !(*this == other);
+		return !(*this == rhs);
 	}
 
 	float& matrix33::operator[] (int index)
@@ -131,6 +132,12 @@ namespace gml
 
 	bool matrix33::inverse()
 	{
+		if (is_orthogonal())
+		{
+			transpose();
+			return true;
+		}
+
 		float det = determinant();
 		if (!fequal(det, 0.0f))
 		{
@@ -153,13 +160,24 @@ namespace gml
 
 			return true;
 		}
-
 		return false;
 	}
 
 	bool matrix33::is_orthogonal() const
 	{
-		//todo.
+		for (int i = 0; i < 3; i++)
+		{
+			if (!fequal(row[i].length_sqr(), 1.0f))
+			{
+				return false;
+			}
+
+			for (int j = i + 1; j < 3; j++)
+			{
+				if (!fequal(dot(row[i], row[j]), 0.0f))
+					return false;
+			}
+		}
 		return false;
 	}
 

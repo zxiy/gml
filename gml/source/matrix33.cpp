@@ -344,4 +344,26 @@ namespace gml
 		}
 		return result;
 	}
+
+	vector2 transform_vector(const matrix33& lhs, const vector2& rhs)
+	{
+		vector2 result;
+		vector3 rhs3(rhs, 0);
+		for (int i = 0; i < 3; i++)
+		{
+			result[i] = dot(rhs3, lhs.col(i));
+		}
+		return result;
+	}
+
+	vector2 transform_point(const matrix33& lhs, const vector2& rhs)
+	{
+		vector2 result;
+		vector3 rhs3(rhs, 1);
+		for (int i = 0; i < 3; i++)
+		{
+			result[i] = dot(rhs3, lhs.col(i));
+		}
+		return result;
+	}
 }

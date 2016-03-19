@@ -88,11 +88,6 @@ namespace gml
 		float length() const;
 
 		float length_sqr() const;
-
-		vector3 to_vector3() const;
-
-		vector3 to_position3() const;
-
 	};
 	
 	vector2 operator+(float value, const vector2& rhs);

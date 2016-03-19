@@ -89,4 +89,8 @@ namespace gml
 	matrix33 operator* (float scaler, const matrix33& rhs);
 
 	vector3 operator* (const vector3& lhs, const matrix33& rhs);
+
+	vector2 transform_vector(const matrix33& lhs, const vector2& rhs);
+
+	vector2 transform_point(const matrix33& lhs, const vector2& rhs);
 }

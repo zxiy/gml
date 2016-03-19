@@ -237,16 +237,6 @@ namespace gml
 		return x*x + y*y;
 	}
 
-	vector3 vector2::to_vector3() const
-	{
-		return vector3(x, y, 0.0f);
-	}
-
-	vector3 vector2::to_position3() const
-	{
-		return vector3(x, y, 1.0f);
-	}
-
 	vector2 operator+(float value, const vector2& rhs)
 	{
 		return rhs + value;

@@ -3,6 +3,7 @@
 namespace gml
 {
 	class vector3;
+
 	class vector4
 	{
 	public:
@@ -16,6 +17,8 @@ namespace gml
 		vector4();
 
 		vector4(float x, float y, float z, float w);
+
+		vector4(const vector3& vec3, float w);
 
 		vector4(const vector4& other);
 

@@ -2,6 +2,7 @@
 
 namespace gml
 {
+	class vector2;
 	class vector4;
 
 	class vector3
@@ -27,6 +28,8 @@ namespace gml
 		vector3();
 
 		vector3(float x, float y, float z);
+
+		vector3(const vector2& vec2, float z);
 
 		vector3(const vector3& other);
 
@@ -92,11 +95,6 @@ namespace gml
 		float length() const;
 
 		float length_sqr() const;
-
-		vector4 to_vector4() const;
-
-		vector4 to_position4() const;
-
 	};
 
 	vector3 operator+(float value, const vector3& rhs);

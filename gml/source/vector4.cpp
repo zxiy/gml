@@ -12,6 +12,11 @@ namespace gml
 		set(x, y, z, w);
 	}
 
+	vector4::vector4(const vector3& vec3, float w)
+	{
+		set(vec3.x, vec3.y, vec3.z, w);
+	}
+
 	vector4::vector4(const vector4& other)
 	{
 		set(other.x, other.y, other.z, other.w);

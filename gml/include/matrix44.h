@@ -3,6 +3,8 @@
 
 namespace gml
 {
+	class vector3;
+
 	class matrix44
 	{
 	public:
@@ -76,4 +78,8 @@ namespace gml
 	matrix44 operator* (float scaler, const matrix44& rhs);
 
 	vector4 operator* (const vector4& lhs, const matrix44& rhs);
+
+	vector3 transform_vector(const matrix44& lhs, const vector3& rhs);
+
+	vector3 transform_point(const matrix44& lhs, const vector3& rhs);
 }

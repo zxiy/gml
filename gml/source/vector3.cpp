@@ -1,3 +1,4 @@
+#include "../include/vector2.h"
 #include "../include/vector3.h"
 #include "../include/vector4.h"
 #include "../include/math_util.h"
@@ -22,6 +23,11 @@ namespace gml
 	vector3::vector3(float x, float y, float z)
 	{
 		set(x, y, z);
+	}
+
+	vector3::vector3(const vector2& vec2, float z)
+	{
+		set(vec2.x, vec2.y, z);
 	}
 
 	vector3::vector3(const vector3& other)
@@ -247,16 +253,6 @@ namespace gml
 	float vector3::length_sqr() const
 	{
 		return x*x + y*y + z*z;
-	}
-
-	vector4 vector3::to_vector4() const
-	{
-		return vector4(x, y, z, 0.0f);
-	}
-
-	vector4 vector3::to_position4() const
-	{
-		return vector4(x, y, z, 1.0f);
 	}
 
 	vector3 operator+(float value, const vector3& rhs)

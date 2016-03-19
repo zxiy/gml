@@ -3,10 +3,40 @@
 
 namespace gml
 {
+	class vector2;
+
 	class matrix33
 	{
 	public:
 		static const matrix33 I;
+
+		static matrix33 rotate22(float radian);
+
+		static matrix33 scale22(float scale);
+
+		static matrix33 scale22(float sx, float sy);
+
+		static matrix33 translate(float x, float y);
+
+		static matrix33 flip22_x();
+
+		static matrix33 flip22_y();
+
+		static matrix33 rotate33_x(float radian);
+
+		static matrix33 rotate33_y(float radian);
+
+		static matrix33 rotate33_z(float radian);
+
+		static matrix33 scale33(float scale);
+
+		static matrix33 scale33(float sx, float sy, float sz);
+
+		static matrix33 flip33_x();
+
+		static matrix33 flip33_y();
+
+		static matrix33 flip33_z();
 	public:
 		union
 		{

@@ -7,6 +7,17 @@ namespace gml
 	{
 	public:
 		static const matrix22 I;
+
+		static matrix22 rotate(float radian);
+
+		static matrix22 scale(float scale);
+
+		static matrix22 scale(float sx, float sy);
+
+		static matrix22 flip_x();
+
+		static matrix22 flip_y();
+
 	public:
 		union
 		{
@@ -59,6 +70,4 @@ namespace gml
 	matrix22 operator* (float scaler, const matrix22& rhs);
 
 	vector2 operator* (const vector2& lhs, const matrix22& rhs);
-
-	matrix22 rotate(float radian);
 }

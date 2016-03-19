@@ -11,6 +11,43 @@ namespace gml
 		0.0f, 1.0f
 		);
 
+	matrix22 matrix22::rotate(float radian)
+	{
+		float cosr = cosf(radian);
+		float sinr = sinf(radian);
+		return matrix22(
+			cosr, -sinr, 
+			sinr, cosr);
+	}
+
+	matrix22 matrix22::matrix22::scale(float scaler)
+	{
+		return matrix22(
+			scaler, 0, 
+			0, scaler);
+	}
+
+	matrix22 matrix22::matrix22::scale(float sx, float sy)
+	{
+		return matrix22(
+			sx, 0, 
+			0, sy);
+	}
+
+	matrix22 matrix22::flip_x()
+	{
+		return matrix22(
+			-1, 0, 
+			0, 1);
+	}
+
+	matrix22 matrix22::flip_y()
+	{
+		return matrix22(
+			1, 0, 
+			0, -1);
+	}
+
 	matrix22::matrix22() {}
 
 	matrix22::matrix22(float _00, float _01, float _10, float _11)
@@ -195,12 +232,5 @@ namespace gml
 			result[i] = dot(lhs, rhs.col(i));
 		}
 		return result;
-	}
-
-	matrix22 rotate(float radian)
-	{
-		float cosr = cosf(radian);
-		float sinr = sinf(radian);
-		return matrix22(cosr, -sinr, sinr, cosr);
 	}
 }

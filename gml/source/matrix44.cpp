@@ -2,6 +2,7 @@
 #include "../include/math_util.h"
 #include "inner_util.h"
 #include <cassert>
+#include <cmath>
 
 namespace gml
 {
@@ -11,6 +12,105 @@ namespace gml
 		0.0f, 0.0f, 1.0f, 0.0f,
 		0.0f, 0.0f, 0.0f, 1.0f
 		);
+
+	matrix44 matrix44::rotate_x(float radian)
+	{
+		float cosr = cosf(radian);
+		float sinr = sinf(radian);
+
+		return matrix44(
+			1, 0, 0, 0,
+			0, cosr, -sinr, 0,
+			0, sinr, cosr, 0,
+			0, 0, 0, 1
+			);
+	}
+
+	matrix44 matrix44::rotate_y(float radian)
+	{
+		float cosr = cosf(radian);
+		float sinr = sinf(radian);
+
+		return matrix44(
+			cosr, 0, -sinr, 0,
+			0, 1, 0, 0,
+			sinr, 0, cosr, 0,
+			0, 0, 0, 1
+			);
+	}
+
+	matrix44 matrix44::rotate_z(float radian)
+	{
+		float cosr = cosf(radian);
+		float sinr = sinf(radian);
+
+		return matrix44(
+			cosr, -sinr, 0, 0,
+			sinr, cosr, 0, 0,
+			0, 0, 1, 0,
+			0, 0, 0, 1
+			);
+	}
+
+	matrix44 matrix44::scale(float scale)
+	{
+		return matrix44(
+			scale, 0, 0, 0,
+			0, scale, 0, 0,
+			0, 0, scale, 0,
+			0, 0, 0, 1
+			);
+	}
+
+	matrix44 matrix44::scale(float sx, float sy, float sz)
+	{
+		return matrix44(
+			sx, 0, 0, 0,
+			0, sy, 0, 0,
+			0, 0, sz, 0,
+			0, 0, 0, 1
+			);
+	}
+
+	matrix44 matrix44::translate(float x, float y, float z)
+	{
+		return matrix44(
+			-1, 0, 0, 0,
+			0, 1, 0, 0,
+			0, 0, 1, 0,
+			x, y, z, 1
+			);
+	}
+
+	matrix44 matrix44::flip_x()
+	{
+		return matrix44(
+			-1, 0, 0, 0,
+			0, 1, 0, 0,
+			0, 0, 1, 0,
+			0, 0, 0, 1
+			);
+	}
+
+	matrix44 matrix44::flip_y()
+	{
+		return matrix44(
+			1, 0, 0, 0,
+			0, -1, 0, 0,
+			0, 0, 1, 0,
+			0, 0, 0, 1
+			);
+	}
+
+	matrix44 matrix44::flip_z()
+	{
+		return matrix44(
+			1, 0, 0, 0,
+			0, 1, 0, 0,
+			0, 0, -1, 0,
+			0, 0, 0, 1
+			);
+	}
 
 	matrix44::matrix44() {}
 
@@ -174,7 +274,7 @@ namespace gml
 
 			return true;
 		}
-			
+
 		return false;
 	}
 

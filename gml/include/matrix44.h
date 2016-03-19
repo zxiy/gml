@@ -7,6 +7,25 @@ namespace gml
 	{
 	public:
 		static const matrix44 I;
+
+		static matrix44 rotate_x(float radian);
+
+		static matrix44 rotate_y(float radian);
+
+		static matrix44 rotate_z(float radian);
+
+		static matrix44 scale(float scale);
+
+		static matrix44 scale(float sx, float sy, float sz);
+
+		static matrix44 translate(float x, float y, float z);
+
+		static matrix44 flip_x();
+
+		static matrix44 flip_y();
+
+		static matrix44 flip_z();
+
 	public:
 		union
 		{

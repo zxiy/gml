@@ -2,6 +2,7 @@
 #include "../include/math_util.h"
 #include "inner_util.h"
 #include <cassert>
+#include <cmath>
 
 namespace gml
 {
@@ -10,6 +11,136 @@ namespace gml
 		0.0f, 1.0f, 0.0f,
 		0.0f, 0.0f, 1.0f
 		);
+
+	matrix33 matrix33::rotate22(float radian)
+	{
+		float cosr = cosf(radian);
+		float sinr = sinf(radian);
+		return matrix33(
+			cosr, -sinr, 0,
+			sinr, cosr, 0,
+			0, 0, 1);
+	}
+
+	matrix33 matrix33::matrix33::scale22(float scaler)
+	{
+		return matrix33(
+			scaler, 0, 0,
+			0, scaler, 0,
+			0, 0, 1);
+	}
+
+	matrix33 matrix33::matrix33::scale22(float sx, float sy)
+	{
+		return matrix33(
+			sx, 0, 0,
+			0, sy, 0,
+			0, 0, 1);
+	}
+	matrix33 matrix33::translate(float x, float y)
+	{
+		return matrix33(
+			1, 0, 0,
+			0, 1, 0,
+			x, y, 1);
+	}
+
+	matrix33 matrix33::flip22_x()
+	{
+		return matrix33(
+			-1, 0, 0,
+			0, 1, 0,
+			0, 0, 1);
+	}
+
+	matrix33 matrix33::flip22_y()
+	{
+		return matrix33(
+			1, 0, 0,
+			0, -1, 0,
+			0, 0, 1);
+	}
+
+	matrix33 matrix33::rotate33_x(float radian)
+	{
+		float cosr = cosf(radian);
+		float sinr = sinf(radian);
+
+		return matrix33(
+			1, 0, 0,
+			0, cosr, -sinr,
+			0, sinr, cosr
+			);
+	}
+
+	matrix33 matrix33::rotate33_y(float radian)
+	{
+		float cosr = cosf(radian);
+		float sinr = sinf(radian);
+
+		return matrix33(
+			cosr, 0, -sinr,
+			0, 1, 0,
+			sinr, 0, cosr
+			);
+	}
+
+	matrix33 matrix33::rotate33_z(float radian)
+	{
+		float cosr = cosf(radian);
+		float sinr = sinf(radian);
+
+		return matrix33(
+			cosr, -sinr, 0,
+			sinr, cosr, 0,
+			0, 0, 1
+			);
+	}
+
+	matrix33 matrix33::scale33(float scale)
+	{
+		return matrix33(
+			scale, 0, 0,
+			0, scale, 0,
+			0, 0, scale
+			);
+	}
+
+	matrix33 matrix33::scale33(float sx, float sy, float sz)
+	{
+		return matrix33(
+			sx, 0, 0,
+			0, sy, 0,
+			0, 0, sz
+			);
+	}
+
+	matrix33 matrix33::flip33_x()
+	{
+		return matrix33(
+			-1, 0, 0,
+			0, 1, 0,
+			0, 0, 1
+			);
+	}
+
+	matrix33 matrix33::flip33_y()
+	{
+		return matrix33(
+			1, 0, 0,
+			0, -1, 0,
+			0, 0, 1
+			);
+	}
+
+	matrix33 matrix33::flip33_z()
+	{
+		return matrix33(
+			1, 0, 0,
+			0, 1, 0,
+			0, 0, -1
+			);
+	}
 
 	matrix33::matrix33() {}
 

@@ -196,21 +196,11 @@ namespace gml
 		}
 		else
 		{
-			make_zero();
+			*this = zero;
 		}
 		return *this;
 	}
-
-	vector3& vector3::make_zero()
-	{
-		return set(0.0f, 0.0f, 0.0f);
-	}
-
-	vector3& vector3::make_one()
-	{
-		return set(1.0f, 1.0f, 1.0f);
-	}
-
+	
 	vector3& vector3::clamp()
 	{
 		if (x > 1.0f) x = 1.0f;

@@ -181,19 +181,9 @@ namespace gml
 		}
 		else
 		{
-			make_zero();
+			*this = zero;
 		}
 		return *this;
-	}
-
-	vector2& vector2::make_zero()
-	{
-		return set(0.0f, 0.0f);
-	}
-
-	vector2& vector2::make_one()
-	{
-		return set(1.0f, 1.0f);
 	}
 
 	vector2& vector2::clamp()

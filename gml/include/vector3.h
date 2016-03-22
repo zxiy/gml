@@ -80,10 +80,6 @@ namespace gml
 
 		vector3& normalize();
 
-		vector3& make_zero();
-
-		vector3& make_one();
-
 		vector3& clamp();
 
 		vector3 clamped() const;

@@ -73,10 +73,6 @@ namespace gml
 
 		vector2& normalize();
 
-		vector2& make_zero();
-
-		vector2& make_one();
-
 		vector2& clamp();
 
 		vector2 clamped() const;

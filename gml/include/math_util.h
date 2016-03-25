@@ -10,8 +10,6 @@ namespace gml
 
 	float r2a(float raian);
 
-	
-
 	template<typename T>
 	inline T lerp(T left, T right, float fac)
 	{
@@ -23,6 +21,4 @@ namespace gml
 	{
 		T tmp = a; a = b; b = tmp;
 	}
-
-	
 }

@@ -1,4 +1,4 @@
-#include "../include/matrix44.h"
+#include "../include/matrix.h"
 #include "../include/math_util.h"
 #include "inner_util.h"
 #include <cassert>
@@ -6,19 +6,19 @@
 
 namespace gml
 {
-	const matrix44 matrix44::I(
+	const mat44 mat44::I(
 		1.0f, 0.0f, 0.0f, 0.0f,
 		0.0f, 1.0f, 0.0f, 0.0f,
 		0.0f, 0.0f, 1.0f, 0.0f,
 		0.0f, 0.0f, 0.0f, 1.0f
 		);
 
-	matrix44 matrix44::rotate_x(float radian)
+	mat44 mat44::rotate_x(float radian)
 	{
 		float cosr = cosf(radian);
 		float sinr = sinf(radian);
 
-		return matrix44(
+		return mat44(
 			1, 0, 0, 0,
 			0, cosr, -sinr, 0,
 			0, sinr, cosr, 0,
@@ -26,12 +26,12 @@ namespace gml
 			);
 	}
 
-	matrix44 matrix44::rotate_y(float radian)
+	mat44 mat44::rotate_y(float radian)
 	{
 		float cosr = cosf(radian);
 		float sinr = sinf(radian);
 
-		return matrix44(
+		return mat44(
 			cosr, 0, -sinr, 0,
 			0, 1, 0, 0,
 			sinr, 0, cosr, 0,
@@ -39,12 +39,12 @@ namespace gml
 			);
 	}
 
-	matrix44 matrix44::rotate_z(float radian)
+	mat44 mat44::rotate_z(float radian)
 	{
 		float cosr = cosf(radian);
 		float sinr = sinf(radian);
 
-		return matrix44(
+		return mat44(
 			cosr, -sinr, 0, 0,
 			sinr, cosr, 0, 0,
 			0, 0, 1, 0,
@@ -52,9 +52,9 @@ namespace gml
 			);
 	}
 
-	matrix44 matrix44::scale(float scale)
+	mat44 mat44::scale(float scale)
 	{
-		return matrix44(
+		return mat44(
 			scale, 0, 0, 0,
 			0, scale, 0, 0,
 			0, 0, scale, 0,
@@ -62,9 +62,9 @@ namespace gml
 			);
 	}
 
-	matrix44 matrix44::scale(float sx, float sy, float sz)
+	mat44 mat44::scale(float sx, float sy, float sz)
 	{
-		return matrix44(
+		return mat44(
 			sx, 0, 0, 0,
 			0, sy, 0, 0,
 			0, 0, sz, 0,
@@ -72,9 +72,9 @@ namespace gml
 			);
 	}
 
-	matrix44 matrix44::translate(float x, float y, float z)
+	mat44 mat44::translate(float x, float y, float z)
 	{
-		return matrix44(
+		return mat44(
 			-1, 0, 0, 0,
 			0, 1, 0, 0,
 			0, 0, 1, 0,
@@ -82,9 +82,9 @@ namespace gml
 			);
 	}
 
-	matrix44 matrix44::flip_x()
+	mat44 mat44::flip_x()
 	{
-		return matrix44(
+		return mat44(
 			-1, 0, 0, 0,
 			0, 1, 0, 0,
 			0, 0, 1, 0,
@@ -92,9 +92,9 @@ namespace gml
 			);
 	}
 
-	matrix44 matrix44::flip_y()
+	mat44 mat44::flip_y()
 	{
-		return matrix44(
+		return mat44(
 			1, 0, 0, 0,
 			0, -1, 0, 0,
 			0, 0, 1, 0,
@@ -102,9 +102,9 @@ namespace gml
 			);
 	}
 
-	matrix44 matrix44::flip_z()
+	mat44 mat44::flip_z()
 	{
-		return matrix44(
+		return mat44(
 			1, 0, 0, 0,
 			0, 1, 0, 0,
 			0, 0, -1, 0,
@@ -112,9 +112,9 @@ namespace gml
 			);
 	}
 
-	matrix44::matrix44() {}
+	mat44::mat44() {}
 
-	matrix44::matrix44(float _00, float _01, float _02, float _03, float _10, float _11, float _12, float _13, float _20, float _21, float _22, float _23, float _30, float _31, float _32, float _33)
+	mat44::mat44(float _00, float _01, float _02, float _03, float _10, float _11, float _12, float _13, float _20, float _21, float _22, float _23, float _30, float _31, float _32, float _33)
 	{
 		this->_00 = _00;	this->_01 = _01;	this->_02 = _02;	this->_03 = _03;
 		this->_10 = _10;	this->_11 = _11;	this->_12 = _12;	this->_13 = _13;
@@ -122,12 +122,12 @@ namespace gml
 		this->_30 = _30;	this->_31 = _31;	this->_32 = _32;	this->_33 = _33;
 	}
 
-	matrix44::matrix44(const matrix44& other)
+	mat44::mat44(const mat44& other)
 	{
 		*this = other;
 	}
 
-	matrix44& matrix44::operator=(const matrix44& other)
+	mat44& mat44::operator=(const mat44& other)
 	{
 		for (int i = 0; i < 16; i++)
 		{
@@ -136,23 +136,23 @@ namespace gml
 		return *this;
 	}
 
-	matrix44 matrix44::operator*(float scaler) const
+	mat44 mat44::operator*(float scaler) const
 	{
-		matrix44 result(*this);
+		mat44 result(*this);
 		result *= scaler;
 		return result;
 	}
 
-	matrix44 matrix44::operator*(const matrix44& rhs) const
+	mat44 mat44::operator*(const mat44& rhs) const
 	{
-		matrix44 result(*this);
+		mat44 result(*this);
 		result *= rhs;
 		return result;
 	}
 
-	vector4 matrix44::operator* (const vector4& rhs) const
+	vec4 mat44::operator* (const vec4& rhs) const
 	{
-		vector4 result;
+		vec4 result;
 		for (int i = 0; i < 4; i++)
 		{
 			result[i] = dot(row[i], rhs);
@@ -160,7 +160,7 @@ namespace gml
 		return result;
 	}
 
-	matrix44& matrix44::operator*=(float scaler)
+	mat44& mat44::operator*=(float scaler)
 	{
 		for (int i = 0; i < 4; i++)
 		{
@@ -169,9 +169,9 @@ namespace gml
 		return *this;
 	}
 
-	matrix44& matrix44::operator*=(const matrix44& rhs)
+	mat44& mat44::operator*=(const mat44& rhs)
 	{
-		matrix44 copy(*this);
+		mat44 copy(*this);
 		for (int i = 0; i < 4; i++)
 		{
 			for (int j = 0; j < 4; j++)
@@ -182,7 +182,7 @@ namespace gml
 		return *this;
 	}
 
-	bool matrix44::operator== (const matrix44& other) const
+	bool mat44::operator== (const mat44& other) const
 	{
 		if (&other != this)
 		{
@@ -195,34 +195,34 @@ namespace gml
 		return true;
 	}
 
-	bool matrix44::operator!= (const matrix44& other) const
+	bool mat44::operator!= (const mat44& other) const
 	{
 		return !(*this == other);
 	}
 
-	float& matrix44::operator[] (int index)
+	float& mat44::operator[] (int index)
 	{
-		return const_cast<float&>(const_cast<const matrix44*>(this)->operator[](index));
+		return const_cast<float&>(const_cast<const mat44*>(this)->operator[](index));
 	}
 
-	const float& matrix44::operator[] (int index) const
+	const float& mat44::operator[] (int index) const
 	{
 		assert(index >= 0 && index < 16);
 		return *(&(m[0][0]) + index);
 	}
 
-	vector4 matrix44::col(int index) const
+	vec4 mat44::col(int index) const
 	{
 		assert(index >= 0 && index < 4);
-		return vector4(row[0][index], row[1][index], row[2][index], row[3][index]);
+		return vec4(row[0][index], row[1][index], row[2][index], row[3][index]);
 	}
 
-	matrix44& matrix44::identity()
+	mat44& mat44::identity()
 	{
 		return *this = I;
 	}
 
-	matrix44& matrix44::transpose()
+	mat44& mat44::transpose()
 	{
 		swap(this->_10, this->_01);
 		swap(this->_20, this->_02);
@@ -235,20 +235,20 @@ namespace gml
 		return *this;
 	}
 
-	matrix44 matrix44::transposed() const
+	mat44 mat44::transposed() const
 	{
-		matrix44 result(*this);
+		mat44 result(*this);
 		result.transpose();
 		return result;
 	}
 
-	bool matrix44::inverse()
+	bool mat44::inverse()
 	{
 		float det = determinant();
 		if (!fequal(det, 0.0f))
 		{
 			det = 1.0f / det;
-			matrix44 copy(*this);
+			mat44 copy(*this);
 
 			//to-do det_impl is calculated above in determinant().
 			//try to gcd
@@ -278,7 +278,7 @@ namespace gml
 		return false;
 	}
 
-	float matrix44::determinant() const
+	float mat44::determinant() const
 	{
 		return determinant_impl(
 			_00, _01, _02, _03,
@@ -287,14 +287,14 @@ namespace gml
 			_30, _31, _32, _33);
 	}
 
-	matrix44 operator* (float scaler, const matrix44& rhs)
+	mat44 operator* (float scaler, const mat44& rhs)
 	{
 		return rhs * scaler;
 	}
 
-	vector4 operator* (const vector4& lhs, const matrix44& rhs)
+	vec4 operator* (const vec4& lhs, const mat44& rhs)
 	{
-		vector4 result;
+		vec4 result;
 		for (int i = 0; i < 4; i++)
 		{
 			result[i] = dot(lhs, rhs.col(i));
@@ -302,10 +302,10 @@ namespace gml
 		return result;
 	}
 
-	vector3 transform_vector(const matrix44& lhs, const vector3& rhs)
+	vec3 transform_vector(const mat44& lhs, const vec3& rhs)
 	{
-		vector3 result;
-		vector4 rhs4(rhs, 0);
+		vec3 result;
+		vec4 rhs4(rhs, 0);
 		for (int i = 0; i < 3; i++)
 		{
 			result[i] = dot(rhs4, lhs.col(i));
@@ -313,10 +313,10 @@ namespace gml
 		return result;
 	}
 
-	vector3 transform_point(const matrix44& lhs, const vector3& rhs)
+	vec3 transform_point(const mat44& lhs, const vec3& rhs)
 	{
-		vector3 result;
-		vector4 rhs4(rhs, 1);
+		vec3 result;
+		vec4 rhs4(rhs, 1);
 		for (int i = 0; i < 3; i++)
 		{
 			result[i] = dot(rhs4, lhs.col(i));

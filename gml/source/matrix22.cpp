@@ -1,4 +1,4 @@
-#include "../include/matrix22.h"
+#include "../include/matrix.h"
 #include "../include/math_util.h"
 #include "inner_util.h"
 #include <cassert>
@@ -6,62 +6,62 @@
 
 namespace gml
 {
-	const matrix22 matrix22::I(
+	const mat22 mat22::I(
 		1.0f, 0.0f,
 		0.0f, 1.0f
 		);
 
-	matrix22 matrix22::rotate(float radian)
+	mat22 mat22::rotate(float radian)
 	{
 		float cosr = cosf(radian);
 		float sinr = sinf(radian);
-		return matrix22(
+		return mat22(
 			cosr, -sinr, 
 			sinr, cosr);
 	}
 
-	matrix22 matrix22::matrix22::scale(float scaler)
+	mat22 mat22::mat22::scale(float scaler)
 	{
-		return matrix22(
+		return mat22(
 			scaler, 0, 
 			0, scaler);
 	}
 
-	matrix22 matrix22::matrix22::scale(float sx, float sy)
+	mat22 mat22::mat22::scale(float sx, float sy)
 	{
-		return matrix22(
+		return mat22(
 			sx, 0, 
 			0, sy);
 	}
 
-	matrix22 matrix22::flip_x()
+	mat22 mat22::flip_x()
 	{
-		return matrix22(
+		return mat22(
 			-1, 0, 
 			0, 1);
 	}
 
-	matrix22 matrix22::flip_y()
+	mat22 mat22::flip_y()
 	{
-		return matrix22(
+		return mat22(
 			1, 0, 
 			0, -1);
 	}
 
-	matrix22::matrix22() {}
+	mat22::mat22() {}
 
-	matrix22::matrix22(float _00, float _01, float _10, float _11)
+	mat22::mat22(float _00, float _01, float _10, float _11)
 	{
 		this->_00 = _00;	this->_01 = _01;
 		this->_10 = _10;	this->_11 = _11;
 	}
 
-	matrix22::matrix22(const matrix22& other)
+	mat22::mat22(const mat22& other)
 	{
 		*this = other;
 	}
 
-	matrix22& matrix22::operator=(const matrix22& rhs)
+	mat22& mat22::operator=(const mat22& rhs)
 	{
 		if (&rhs != this)
 		{
@@ -73,23 +73,23 @@ namespace gml
 		return *this;
 	}
 
-	matrix22 matrix22::operator*(float scaler) const
+	mat22 mat22::operator*(float scaler) const
 	{
-		matrix22 result(*this);
+		mat22 result(*this);
 		result *= scaler;
 		return result;
 	}
 
-	matrix22 matrix22::operator*(const matrix22& rhs) const
+	mat22 mat22::operator*(const mat22& rhs) const
 	{
-		matrix22 result(*this);
+		mat22 result(*this);
 		result *= rhs;
 		return result;
 	}
 
-	vector2 matrix22::operator* (const vector2& rhs) const
+	vec2 mat22::operator* (const vec2& rhs) const
 	{
-		vector2 result;
+		vec2 result;
 		for (int i = 0; i < 2; i++)
 		{
 			result[i] = dot(row[i], rhs);
@@ -97,7 +97,7 @@ namespace gml
 		return result;
 	}
 
-	matrix22& matrix22::operator*=(float scaler)
+	mat22& mat22::operator*=(float scaler)
 	{
 		for (int i = 0; i < 4; i++)
 		{
@@ -106,9 +106,9 @@ namespace gml
 		return *this;
 	}
 
-	matrix22& matrix22::operator*=(const matrix22& rhs)
+	mat22& mat22::operator*=(const mat22& rhs)
 	{
-		matrix22 copy(*this);
+		mat22 copy(*this);
 		for (int i = 0; i < 2; i++)
 		{
 			for (int j = 0; j < 2; j++)
@@ -119,7 +119,7 @@ namespace gml
 		return *this;
 	}
 
-	bool matrix22::operator== (const matrix22& rhs) const
+	bool mat22::operator== (const mat22& rhs) const
 	{
 		if (&rhs != this)
 		{
@@ -132,47 +132,47 @@ namespace gml
 		return true;
 	}
 
-	bool matrix22::operator!= (const matrix22& rhs) const
+	bool mat22::operator!= (const mat22& rhs) const
 	{
 		return !(*this == rhs);
 	}
 
-	float& matrix22::operator[] (int index)
+	float& mat22::operator[] (int index)
 	{
-		return const_cast<float&>(const_cast<const matrix22*>(this)->operator[](index));
+		return const_cast<float&>(const_cast<const mat22*>(this)->operator[](index));
 	}
 
-	const float& matrix22::operator[] (int index) const
+	const float& mat22::operator[] (int index) const
 	{
 		assert(index >= 0 && index < 4);
 		return *(&(m[0][0]) + index);
 	}
 
-	vector2 matrix22::col(int index) const
+	vec2 mat22::col(int index) const
 	{
 		assert(index >= 0 && index < 2);
-		return vector2(row[0][index], row[1][index]);
+		return vec2(row[0][index], row[1][index]);
 	}
 
-	matrix22& matrix22::identity()
+	mat22& mat22::identity()
 	{
 		return *this = I;
 	}
 
-	matrix22& matrix22::transpose()
+	mat22& mat22::transpose()
 	{
 		swap(this->_10, this->_01);
 		return *this;
 	}
 
-	matrix22 matrix22::transposed() const
+	mat22 mat22::transposed() const
 	{
-		matrix22 result(*this);
+		mat22 result(*this);
 		result.transpose();
 		return result;
 	}
 
-	bool matrix22::inverse()
+	bool mat22::inverse()
 	{
 		if (is_orthogonal())
 		{
@@ -194,7 +194,7 @@ namespace gml
 		return false;
 	}
 
-	bool matrix22::is_orthogonal() const
+	bool mat22::is_orthogonal() const
 	{
 		for (int i = 0; i < 2; i++)
 		{
@@ -212,21 +212,21 @@ namespace gml
 		return true;
 	}
 
-	float matrix22::determinant() const
+	float mat22::determinant() const
 	{
 		return determinant_impl(
 			_00, _01,
 			_10, _11);
 	}
 
-	matrix22 operator* (float scaler, const matrix22& rhs)
+	mat22 operator* (float scaler, const mat22& rhs)
 	{
 		return rhs * scaler;
 	}
 
-	vector2 operator* (const vector2& lhs, const matrix22& rhs)
+	vec2 operator* (const vec2& lhs, const mat22& rhs)
 	{
-		vector2 result;
+		vec2 result;
 		for (int i = 0; i < 2; i++)
 		{
 			result[i] = dot(lhs, rhs.col(i));

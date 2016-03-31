@@ -1,43 +1,42 @@
+#include "../include/vector.h"
 #include "../include/math_util.h"
-#include "../include/vector2.h"
-#include "../include/vector3.h"
 #include <cmath>
 #include <cassert>
 
 namespace gml
 {
-	const vector2 vector2::zero(0.0f, 0.0f);
-	const vector2 vector2::one(1.0f, 1.0f);
-	const vector2 vector2::left(-1.0f, 0.0f);
-	const vector2 vector2::right(1.0f, 0.0f);
-	const vector2 vector2::up(0.0f, 1.0f);
-	const vector2 vector2::down(0.0f, -1.0f);
+	const vec2 vec2::zero(0.0f, 0.0f);
+	const vec2 vec2::one(1.0f, 1.0f);
+	const vec2 vec2::left(-1.0f, 0.0f);
+	const vec2 vec2::right(1.0f, 0.0f);
+	const vec2 vec2::up(0.0f, 1.0f);
+	const vec2 vec2::down(0.0f, -1.0f);
 
-	vector2::vector2()
+	vec2::vec2()
 	{
 	}
 
-	vector2::vector2(float x, float y)
+	vec2::vec2(float x, float y)
 	{
 		set(x, y);
 	}
 
-	vector2::vector2(const vector2& other)
+	vec2::vec2(const vec2& other)
 	{
 		set(other.x, other.y);
 	}
 
-	vector2::vector2(const vector3& vec3)
+	vec2::vec2(const vec3& vec3)
 	{
 		set(vec3.x, vec3.y);
 	}
 
-	vector2 vector2::operator-() const
+	vec2 vec2::operator-() const
 	{
-		return vector2(-x, -y);
+		return vec2(-x, -y);
 	}
 
-	vector2& vector2::operator=(const vector2& rhs)
+	vec2& vec2::operator=(const vec2& rhs)
 	{
 		if (&rhs == this)
 			return *this;
@@ -46,7 +45,7 @@ namespace gml
 		return *this;
 	}
 
-	bool vector2::operator==(const vector2& rhs) const
+	bool vec2::operator==(const vec2& rhs) const
 	{
 		if (&rhs == this)
 			return true;
@@ -55,122 +54,122 @@ namespace gml
 			fequal(y, rhs.y);
 	}
 
-	bool vector2::operator!=(const vector2& rhs) const
+	bool vec2::operator!=(const vec2& rhs) const
 	{
 		return !(*this == rhs);
 	}
 
-	vector2 vector2::operator+(float value) const
+	vec2 vec2::operator+(float value) const
 	{
-		vector2 copy(*this);
+		vec2 copy(*this);
 		copy += value;
 		return copy;
 	}
 
-	vector2 vector2::operator-(float value) const
+	vec2 vec2::operator-(float value) const
 	{
-		vector2 copy(*this);
+		vec2 copy(*this);
 		copy -= value;
 		return copy;
 	}
 
-	vector2 vector2::operator*(float value) const
+	vec2 vec2::operator*(float value) const
 	{
-		vector2 copy(*this);
+		vec2 copy(*this);
 		copy *= value;
 		return copy;
 	}
 
-	vector2 vector2::operator+(const vector2& rhs) const
+	vec2 vec2::operator+(const vec2& rhs) const
 	{
-		return vector2(x + rhs.x, y + rhs.y);
+		return vec2(x + rhs.x, y + rhs.y);
 	}
 
 
-	vector2 vector2::operator-(const vector2& rhs) const
+	vec2 vec2::operator-(const vec2& rhs) const
 	{
-		return vector2(x - rhs.x, y - rhs.y);
+		return vec2(x - rhs.x, y - rhs.y);
 	}
 
 
-	vector2 vector2::operator*(const vector2& rhs) const
+	vec2 vec2::operator*(const vec2& rhs) const
 	{
-		return vector2(rhs.x, rhs.y);
+		return vec2(rhs.x, rhs.y);
 	}
 
-	vector2& vector2::operator+=(float value)
+	vec2& vec2::operator+=(float value)
 	{
 		x += value;
 		y += value;
 		return *this;
 	}
 
-	vector2& vector2::operator-=(float value)
+	vec2& vec2::operator-=(float value)
 	{
 		x -= value;
 		y -= value;
 		return *this;
 	}
 
-	vector2& vector2::operator*=(float value)
+	vec2& vec2::operator*=(float value)
 	{
 		x *= value;
 		y *= value;
 		return *this;
 	}
 
-	vector2& vector2::operator+=(const vector2& rhs)
+	vec2& vec2::operator+=(const vec2& rhs)
 	{
 		x += rhs.x;
 		y += rhs.y;
 		return *this;
 	}
 
-	vector2& vector2::operator-=(const vector2& rhs)
+	vec2& vec2::operator-=(const vec2& rhs)
 	{
 		x -= rhs.x;
 		y -= rhs.y;
 		return *this;
 	}
 
-	vector2& vector2::operator*=(const vector2& rhs)
+	vec2& vec2::operator*=(const vec2& rhs)
 	{
 		x *= rhs.x;
 		y *= rhs.y;
 		return *this;
 	}
 
-	float& vector2::operator[](int index)
+	float& vec2::operator[](int index)
 	{
-		return const_cast<float&>(const_cast<const vector2*>(this)->operator[](index));
+		return const_cast<float&>(const_cast<const vec2*>(this)->operator[](index));
 	}
 
-	const float& vector2::operator[](int index) const
+	const float& vec2::operator[](int index) const
 	{
 		assert(index >= 0 && index < 2);
 		return *(&x + index);
 	}
 
-	vector2& vector2::set(float x, float y)
+	vec2& vec2::set(float x, float y)
 	{
 		this->x = x;
 		this->y = y;
 		return *this;
 	}
 
-	vector2& vector2::set(const vector3& other)
+	vec2& vec2::set(const vec3& other)
 	{
 		set(other.x, other.y);
 		return *this;
 	}
 
-	vector2 vector2::normalized() const
+	vec2 vec2::normalized() const
 	{
-		vector2 copy(*this);
+		vec2 copy(*this);
 		return copy.normalize();
 	}
 
-	vector2& vector2::normalize()
+	vec2& vec2::normalize()
 	{
 		float lengthrev = length();
 		if (!fequal(lengthrev, 0.0f))
@@ -186,7 +185,7 @@ namespace gml
 		return *this;
 	}
 
-	vector2& vector2::clamp()
+	vec2& vec2::clamp()
 	{
 		if (x > 1.0f) x = 1.0f;
 		else if (x < 0.0f) x = 0.0f;
@@ -197,72 +196,72 @@ namespace gml
 		return *this;
 	}
 
-	vector2 vector2::clamped() const
+	vec2 vec2::clamped() const
 	{
-		vector2 copy(*this);
+		vec2 copy(*this);
 
 		return copy.clamp();
 	}
 
-	vector2& vector2::inverse()
+	vec2& vec2::inverse()
 	{
 		x = 1.0f / x;
 		y = 1.0f / y;
 		return *this;
 	}
 
-	vector2 vector2::inversed() const
+	vec2 vec2::inversed() const
 	{
-		vector2 copy(*this);
+		vec2 copy(*this);
 		return copy.inverse();
 	}
 
-	float vector2::length() const
+	float vec2::length() const
 	{
 		return sqrtf(x*x + y*y);
 	}
 
-	float vector2::length_sqr() const
+	float vec2::length_sqr() const
 	{
 		return x*x + y*y;
 	}
 
-	vector2 operator+(float value, const vector2& rhs)
+	vec2 operator+(float value, const vec2& rhs)
 	{
 		return rhs + value;
 	}
 
-	vector2 operator-(float value, const vector2& rhs)
+	vec2 operator-(float value, const vec2& rhs)
 	{
 		return rhs - value;
 	}
 
-	vector2 operator*(float value, const vector2& rhs)
+	vec2 operator*(float value, const vec2& rhs)
 	{
 		return rhs * value;
 	}
 
-	float dot(const vector2& lhs, const vector2& rhs)
+	float dot(const vec2& lhs, const vec2& rhs)
 	{
 		return lhs.x * rhs.x + lhs.y * rhs.y;
 	}
 
-	float cross(const vector2& lhs, const vector2& rhs)
+	float cross(const vec2& lhs, const vec2& rhs)
 	{
 		return lhs.x * rhs.y - lhs.y * rhs.x;
 	}
 
-	vector2 min_combine(const vector2& lhs, const vector2& rhs)
+	vec2 min_combine(const vec2& lhs, const vec2& rhs)
 	{
-		return vector2(
+		return vec2(
 			lhs.x < rhs.x ? lhs.x : rhs.x,
 			lhs.y < rhs.y ? lhs.y : rhs.y
 			);
 	}
 
-	vector2 max_combine(const vector2& lhs, const vector2& rhs)
+	vec2 max_combine(const vec2& lhs, const vec2& rhs)
 	{
-		return vector2(
+		return vec2(
 			lhs.x > rhs.x ? lhs.x : rhs.x,
 			lhs.y > rhs.y ? lhs.y : rhs.y
 			);

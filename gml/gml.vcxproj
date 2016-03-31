@@ -21,14 +21,9 @@
   <ItemGroup>
     <ClInclude Include="include\aabb.h" />
     <ClInclude Include="include\math_util.h" />
-    <ClInclude Include="include\matrix22.h" />
-    <ClInclude Include="include\matrix33.h" />
-    <ClInclude Include="include\matrix44.h" />
+    <ClInclude Include="include\matrix.h" />
     <ClInclude Include="include\ray.h" />
-    <ClInclude Include="include\swizzle.h" />
-    <ClInclude Include="include\vector2.h" />
-    <ClInclude Include="include\vector3.h" />
-    <ClInclude Include="include\vector4.h" />
+    <ClInclude Include="include\vector.h" />
     <ClInclude Include="source\inner_util.h" />
   </ItemGroup>
   <ItemGroup>

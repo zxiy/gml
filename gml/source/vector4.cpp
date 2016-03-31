@@ -1,28 +1,27 @@
-#include "../include/vector4.h"
-#include "../include/vector3.h"
+#include "../include/vector.h"
 #include "../include/math_util.h"
 #include <cassert>
 
 namespace gml
 {
-	vector4::vector4(){ }
+	vec4::vec4(){ }
 
-	vector4::vector4(float x, float y, float z, float w)
+	vec4::vec4(float x, float y, float z, float w)
 	{
 		set(x, y, z, w);
 	}
 
-	vector4::vector4(const vector3& vec3, float w)
+	vec4::vec4(const vec3& vec3, float w)
 	{
 		set(vec3.x, vec3.y, vec3.z, w);
 	}
 
-	vector4::vector4(const vector4& other)
+	vec4::vec4(const vec4& other)
 	{
 		set(other.x, other.y, other.z, other.w);
 	}
 
-	vector4& vector4::operator=(const vector4& rhs)
+	vec4& vec4::operator=(const vec4& rhs)
 	{
 		if (&rhs != this)
 		{
@@ -31,7 +30,7 @@ namespace gml
 		return *this;
 	}
 
-	bool vector4::operator==(const vector4& rhs) const
+	bool vec4::operator==(const vec4& rhs) const
 	{
 		if (&rhs == this)
 			return true;
@@ -42,29 +41,29 @@ namespace gml
 			fequal(w, rhs.w);
 	}
 
-	bool vector4::operator!=(const vector4& rhs) const
+	bool vec4::operator!=(const vec4& rhs) const
 	{
 		return !(*this == rhs);
 	}
 
 	//hack
-	float& vector4::operator[](int index)
+	float& vec4::operator[](int index)
 	{
-		return const_cast<float&>(const_cast<const vector4*>(this)->operator[](index));
+		return const_cast<float&>(const_cast<const vec4*>(this)->operator[](index));
 	}
 
-	const float& vector4::operator[](int index) const
+	const float& vec4::operator[](int index) const
 	{
 		assert(index >= 0 && index < 4);
 		return *(&x + index);
 	}
 
-	vector4::operator float*()
+	vec4::operator float*()
 	{
 		return &(this->x);
 	}
 
-	vector4& vector4::set(float x, float y, float z, float w)
+	vec4& vec4::set(float x, float y, float z, float w)
 	{
 		this->x = x;
 		this->y = y;
@@ -73,7 +72,7 @@ namespace gml
 		return *this;
 	}
 
-	vector4& vector4::replace(const vector3& vec3)
+	vec4& vec4::replace(const vec3& vec3)
 	{
 		this->x = vec3.x;
 		this->y = vec3.y;
@@ -81,7 +80,7 @@ namespace gml
 		return *this;
 	}
 
-	float dot(const vector4& lhs, const vector4& rhs)
+	float dot(const vec4& lhs, const vec4& rhs)
 	{
 		return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z + lhs.w * rhs.w;
 	}

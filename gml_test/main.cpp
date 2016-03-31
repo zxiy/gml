@@ -1,11 +1,6 @@
-#include <gml/include/vector2.h>
-#include <gml/include/vector3.h>
-#include <gml/include/vector4.h>
+#include <gml/include/vector.h>
+#include <gml/include/matrix.h>
 #include <gml/include/math_util.h>
-#include <gml/include/swizzle.h>
-#include <gml/include/matrix22.h>
-#include <gml/include/matrix33.h>
-#include <gml/include/matrix44.h>
 #include <iostream>
 
 #pragma comment(lib, "gml.lib")
@@ -21,13 +16,13 @@ void testMatrix44();
 
 int main()
 {
-	std::cout << "test vector2 \n";
+	std::cout << "test vec2 \n";
 	testVector2();
 
-	std::cout << "test vector3 \n";
+	std::cout << "test vec3 \n";
 	testVector3();
 
-	std::cout << "test vector4 \n";
+	std::cout << "test vec4 \n";
 	testVector4();
 
 	std::cout << "test swizzle \n";
@@ -48,9 +43,9 @@ int main()
 
 void testVector3()
 {
-	vector3 a = vector3::one;
-	vector3 b(3, 4, 5);
-	vector3 c;
+	vec3 a = vec3::one;
+	vec3 b(3, 4, 5);
+	vec3 c;
 
 	std::cout << "  c = <" << c.x << "," << c.y << "," << c.z << ">\n"
 		<< "  b.length = " << b.length() << "\n"
@@ -63,11 +58,11 @@ void testVector3()
 	c = b.normalized() * 3.4f;
 	b *= 3.4f;
 	std::cout << "  b == c is " << ((c == b) ? "" : "not ") << "equal \n"
-		<< "  b == vector3::one is " << ((vector3::one == b) ? "" : "not ") << "equal \n\n";
+		<< "  b == vec3::one is " << ((vec3::one == b) ? "" : "not ") << "equal \n\n";
 
-	a = vector3::one + vector3::left;
+	a = vec3::one + vec3::left;
 	std::cout << "  one + left = <" << a.x << "," << a.y << "," << a.z << ">\n";
-	a += vector3::one * vector3::right;
+	a += vec3::one * vec3::right;
 	std::cout << "  result += one * right = <" << a.x << "," << a.y << "," << a.z << ">\n";
 
 	a = b.inversed();
@@ -77,30 +72,30 @@ void testVector3()
 
 	a = cross(b, c);
 	std::cout << "  cross(b,b) = <" << a.x << "," << a.y << "," << a.z << ">\n";
-	a = cross(b, vector3::one);
-	std::cout << "  cross(b,vector3::one) = <" << a[0] << "," << a[1] << "," << a[2] << ">\n"
+	a = cross(b, vec3::one);
+	std::cout << "  cross(b,vec3::one) = <" << a[0] << "," << a[1] << "," << a[2] << ">\n"
 		<< "  dot(b,c) = " << dot(b, c) << "\n\n";
 
-	a = lerp(b, vector3::one, 0.5f);
-	std::cout << "  lerp(b,vector3::one, 0.5f) = <" << a[0] << "," << a[1] << "," << a[2] << ">\n";
-	a = lerp(b, vector3::one, 0.0f);
-	std::cout << "  lerp(b,vector3::one, 0.0f) = <" << a[0] << "," << a[1] << "," << a[2] << ">\n";
-	a = lerp(b, vector3::one, 1.0f);
-	std::cout << "  lerp(b,vector3::one, 1.0f) = <" << a[0] << "," << a[1] << "," << a[2] << ">\n\n";
+	a = lerp(b, vec3::one, 0.5f);
+	std::cout << "  lerp(b,vec3::one, 0.5f) = <" << a[0] << "," << a[1] << "," << a[2] << ">\n";
+	a = lerp(b, vec3::one, 0.0f);
+	std::cout << "  lerp(b,vec3::one, 0.0f) = <" << a[0] << "," << a[1] << "," << a[2] << ">\n";
+	a = lerp(b, vec3::one, 1.0f);
+	std::cout << "  lerp(b,vec3::one, 1.0f) = <" << a[0] << "," << a[1] << "," << a[2] << ">\n\n";
 
 
-	a = max_combine(vector3(1, 2, 3), vector3(3, 2, 1));
+	a = max_combine(vec3(1, 2, 3), vec3(3, 2, 1));
 	std::cout << "  max_combine(<1,2,3>, <3,2,1>) = <" << a[0] << "," << a[1] << "," << a[2] << ">\n\n";
 
-	a = min_combine(vector3(1, 2, 3), vector3(3, 2, 1));
-	std::cout << "  minx_combine(b,vector3::one, 1.0f) = <" << a[0] << "," << a[1] << "," << a[2] << ">\n\n";
+	a = min_combine(vec3(1, 2, 3), vec3(3, 2, 1));
+	std::cout << "  minx_combine(b,vec3::one, 1.0f) = <" << a[0] << "," << a[1] << "," << a[2] << ">\n\n";
 }
 
 void testVector2()
 {
-	vector2 a = vector2::one;
-	vector2 b(3, 4);
-	vector2 c;
+	vec2 a = vec2::one;
+	vec2 b(3, 4);
+	vec2 c;
 
 	std::cout << "  c = <" << c.x << "," << c.y << ">\n"
 		<< "  b.length = " << b.length() << "\n"
@@ -113,12 +108,12 @@ void testVector2()
 	c = b.normalized() * 3.4f;
 	b *= 3.4f;
 	std::cout << "  b == c is " << ((c == b) ? "" : "not ") << "equal \n"
-		<< "  b == vector2::one is " << ((vector2::one == b) ? "" : "not ") << "equal \n\n";
+		<< "  b == vec2::one is " << ((vec2::one == b) ? "" : "not ") << "equal \n\n";
 
 
-	a = vector2::one + vector2::left;
+	a = vec2::one + vec2::left;
 	std::cout << "  one + left = <" << a.x << "," << a.y << ">\n";
-	a += vector2::one * vector2::right;
+	a += vec2::one * vec2::right;
 	std::cout << "  result += one * right = <" << a.x << "," << a.y << ">\n";
 
 	a = b.inversed();
@@ -128,28 +123,28 @@ void testVector2()
 
 
 	std::cout << "  cross(b,b) = <" << cross(b, c) << ">\n";
-	std::cout << "  cross(b,vector2::one) = <"
-		<< cross(b, vector2::one) << ">\n"
+	std::cout << "  cross(b,vec2::one) = <"
+		<< cross(b, vec2::one) << ">\n"
 		<< "  dot(b,c) = " << dot(b, c) << "\n\n";
 
-	a = lerp(b, vector2::one, 0.5f);
-	std::cout << "  lerp(b,vector2::one, 0.5f) = <" << a[0] << "," << a[1] << ">\n";
-	a = lerp(b, vector2::one, 0.0f);
-	std::cout << "  lerp(b,vector2::one, 0.0f) = <" << a[0] << "," << a[1] << ">\n";
-	a = lerp(b, vector2::one, 1.0f);
-	std::cout << "  lerp(b,vector2::one, 1.0f) = <" << a[0] << "," << a[1] << ">\n\n";
+	a = lerp(b, vec2::one, 0.5f);
+	std::cout << "  lerp(b,vec2::one, 0.5f) = <" << a[0] << "," << a[1] << ">\n";
+	a = lerp(b, vec2::one, 0.0f);
+	std::cout << "  lerp(b,vec2::one, 0.0f) = <" << a[0] << "," << a[1] << ">\n";
+	a = lerp(b, vec2::one, 1.0f);
+	std::cout << "  lerp(b,vec2::one, 1.0f) = <" << a[0] << "," << a[1] << ">\n\n";
 
 
-	a = max_combine(vector2(1, 2), vector2(3, 1));
+	a = max_combine(vec2(1, 2), vec2(3, 1));
 	std::cout << "  max_combine(<1,2,3>, <3,2,1>) = <" << a[0] << "," << a[1] << ">\n\n";
 
-	a = min_combine(vector2(1, 3), vector2(3, 2));
-	std::cout << "  minx_combine(b,vector2::one, 1.0f) = <" << a[0] << "," << a[1] << ">\n\n";
+	a = min_combine(vec2(1, 3), vec2(3, 2));
+	std::cout << "  minx_combine(b,vec2::one, 1.0f) = <" << a[0] << "," << a[1] << ">\n\n";
 }
 
 void testMatrix44()
 {
-	matrix44 m;
+	mat44 m;
 
 	std::cout << " union data verify:\n   m.operator[]= {";
 	for (int i = 0; i < 16; i++)
@@ -157,7 +152,7 @@ void testMatrix44()
 		m[i] = i * 1.0f;
 		std::cout << m[i] << (i == 15 ? "" : ",");
 	}
-	std::cout << "}\n   m.vector4   = {";
+	std::cout << "}\n   m.vec4   = {";
 	for (int i = 0; i < 4; i++)
 	{
 		for (int j = 0; j < 4; j++)
@@ -195,8 +190,8 @@ void testMatrix44()
 		<< m._32 << ","
 		<< m._33 << "}\n\n";
 
-	matrix44 a(-4, -3, 3, 0, 0, 2, -2, 0, 1, 4, -1, 0, 1, 2, 50, 1);
-	matrix44 b(a);
+	mat44 a(-4, -3, 3, 0, 0, 2, -2, 0, 1, 4, -1, 0, 1, 2, 50, 1);
+	mat44 b(a);
 
 	std::cout << a[0] << "," << a[1] << "," << a[2] << "," << a[3] << "\n"
 		<< a[4] << "," << a[5] << "," << a[6] << "," << a[7] << "\n"
@@ -226,47 +221,47 @@ void testVector4()
 
 void testSwizzle()
 {
-	vector2 a, vec2(2.1f, 2.2f);
-	vector3 b, vec3(3.1f, 3.2f, 3.3f);
-	vector4 c, vec4(4.1f, 4.2f, 4.3f, 4.4f);
+	vec2 a, v2(2.1f, 2.2f);
+	vec3 b, v3(3.1f, 3.2f, 3.3f);
+	vec4 c, v4(4.1f, 4.2f, 4.3f, 4.4f);
 
-	std::cout << " vec2 : <" << vec2.x << ", " << vec2.y << ">\n";
-	std::cout << " vec3 : <" << vec3.x << ", " << vec3.y << ", " << vec3.z << ">\n";
-	std::cout << " vec4 : <" << vec4.x << ", " << vec4.y << ", " << vec4.z << ", " << vec4.w << ">\n";
+	std::cout << " vec2 : <" << v2.x << ", " << v2.y << ">\n";
+	std::cout << " vec3 : <" << v3.x << ", " << v3.y << ", " << v3.z << ">\n";
+	std::cout << " vec4 : <" << v4.x << ", " << v4.y << ", " << v4.z << ", " << v4.w << ">\n";
 
 	//a = vec3;
-	a = vector2(vec3);
+	a = vec2(v3);
 
-	a = swizzle<y, x>(vec2);
+	a = swizzle<y, x>(v2);
 	std::cout << "  vec2 = vec2.yx : <" << a.x << ", " << a.y << ">\n";
-	a = swizzle<y, z>(vec3);
+	a = swizzle<y, z>(v3);
 	std::cout << "  vec2 = vec3.yz : <" << a.x << ", " << a.y << ">\n";
-	a = swizzle<w, w>(vec4);
+	a = swizzle<w, w>(v4);
 	std::cout << "  vec2 = vec4.ww : <" << a.x << ", " << a.y << ">\n\n";
 
 	//b = vec4;
-	b = vector3(vec4);
+	b = vec3(v4);
 
-	b = swizzle<y, x, y>(vec2);
+	b = swizzle<y, x, y>(v2);
 	std::cout << "  vec3 = vec2.yxy : <" << b.x << ", " << b.y << ", " << b.z << ">\n";
-	b = swizzle<y, z, x>(vec3);
+	b = swizzle<y, z, x>(v3);
 	std::cout << "  vec3 = vec3.yzx : <" << b.x << ", " << b.y << ", " << b.z << ">\n";
-	b = swizzle<w, w, x>(vec4);
+	b = swizzle<w, w, x>(v4);
 	std::cout << "  vec3 = vec4.wwx : <" << b.x << ", " << b.y << ", " << b.z << ">\n\n";
 
-	c = swizzle<y, x, x, y>(vec2);
+	c = swizzle<y, x, x, y>(v2);
 	std::cout << "  vec4 = vec2.yxxy : <" << c.x << ", " << c.y << ", " << c.z << ", " << c.w << ">\n";
-	c = swizzle<y, z, x, z>(vec3);
+	c = swizzle<y, z, x, z>(v3);
 	std::cout << "  vec4 = vec3.yzxz : <" << c.x << ", " << c.y << ", " << c.z << ", " << c.w << ">\n";
-	c = swizzle<z, z, w, y>(vec4);
+	c = swizzle<z, z, w, y>(v4);
 	std::cout << "  vec4 = vec4.zzwy : <" << c.x << ", " << c.y << ", " << c.z << ", " << c.w << ">\n\n";
 }
 
 void testMatrix22()
 {
 	const float r = 0.5f;
-	matrix22 a(cos(r), -sin(r), sin(r), cos(r));
-	matrix22 b(a);
+	mat22 a(cos(r), -sin(r), sin(r), cos(r));
+	mat22 b(a);
 
 	std::cout << "  a = \n  |"
 		<< a[0] << "," << a[1] << "|\n  |"
@@ -301,8 +296,8 @@ void testMatrix22()
 
 void testMatrix33()
 {
-	matrix33 a(-4, -3, 3, 0, 2, -2, 1, 4, -1);
-	matrix33 b(a);
+	mat33 a(-4, -3, 3, 0, 2, -2, 1, 4, -1);
+	mat33 b(a);
 
 	std::cout << a[0] << "," << a[1] << "," << a[2] << "\n"
 		<< a[3] << "," << a[4] << "," << a[5] << "\n"

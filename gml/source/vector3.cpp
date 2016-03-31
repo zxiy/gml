@@ -1,51 +1,49 @@
-#include "../include/vector2.h"
-#include "../include/vector3.h"
-#include "../include/vector4.h"
+#include "../include/vector.h"
 #include "../include/math_util.h"
 #include <cmath>
 #include <cassert>
 
 namespace gml
 {
-	const vector3 vector3::zero(0.0f, 0.0f, 0.0f);
-	const vector3 vector3::one(1.0f, 1.0f, 1.0f);
-	const vector3 vector3::left(-1.0f, 0.0f, 0.0f);
-	const vector3 vector3::right(1.0f, 0.0f, 0.0f);
-	const vector3 vector3::up(0.0f, 1.0f, 0.0f);
-	const vector3 vector3::down(0.0f, -1.0f, 0.0f);
-	const vector3 vector3::forward(0.0f, 0.0f, 1.0f);
-	const vector3 vector3::backward(0.0f, 0.0f, -1.0f);
+	const vec3 vec3::zero(0.0f, 0.0f, 0.0f);
+	const vec3 vec3::one(1.0f, 1.0f, 1.0f);
+	const vec3 vec3::left(-1.0f, 0.0f, 0.0f);
+	const vec3 vec3::right(1.0f, 0.0f, 0.0f);
+	const vec3 vec3::up(0.0f, 1.0f, 0.0f);
+	const vec3 vec3::down(0.0f, -1.0f, 0.0f);
+	const vec3 vec3::forward(0.0f, 0.0f, 1.0f);
+	const vec3 vec3::backward(0.0f, 0.0f, -1.0f);
 
-	vector3::vector3()
+	vec3::vec3()
 	{
 	}
 
-	vector3::vector3(float x, float y, float z)
+	vec3::vec3(float x, float y, float z)
 	{
 		set(x, y, z);
 	}
 
-	vector3::vector3(const vector2& vec2, float z)
+	vec3::vec3(const vec2& vec2, float z)
 	{
 		set(vec2.x, vec2.y, z);
 	}
 
-	vector3::vector3(const vector3& other)
+	vec3::vec3(const vec3& other)
 	{
 		set(other.x, other.y, other.z);
 	}
 
-	vector3::vector3(const vector4& vec4)
+	vec3::vec3(const vec4& vec4)
 	{
 		set(vec4.x, vec4.y, vec4.z);
 	}
 
-	vector3 vector3::operator-() const
+	vec3 vec3::operator-() const
 	{
-		return vector3(-x, -y, -z);
+		return vec3(-x, -y, -z);
 	}
 
-	vector3& vector3::operator=(const vector3& rhs)
+	vec3& vec3::operator=(const vec3& rhs)
 	{
 		if (&rhs != this)
 		{
@@ -54,7 +52,7 @@ namespace gml
 		return *this;
 	}
 
-	bool vector3::operator==(const vector3& rhs) const
+	bool vec3::operator==(const vec3& rhs) const
 	{
 		if (&rhs == this)
 			return true;
@@ -64,48 +62,48 @@ namespace gml
 			fequal(z, rhs.z);
 	}
 
-	bool vector3::operator!=(const vector3& rhs) const
+	bool vec3::operator!=(const vec3& rhs) const
 	{
 		return !(*this == rhs);
 	}
 
-	vector3 vector3::operator+(float value) const
+	vec3 vec3::operator+(float value) const
 	{
-		vector3 copy(*this);
+		vec3 copy(*this);
 		copy += value;
 		return copy;
 	}
 
-	vector3 vector3::operator-(float value) const
+	vec3 vec3::operator-(float value) const
 	{
-		vector3 copy(*this);
+		vec3 copy(*this);
 		copy -= value;
 		return copy;
 	}
 
-	vector3 vector3::operator*(float value) const
+	vec3 vec3::operator*(float value) const
 	{
-		vector3 copy(*this);
+		vec3 copy(*this);
 		copy *= value;
 		return copy;
 	}
 
-	vector3 vector3::operator+(const vector3& rhs) const
+	vec3 vec3::operator+(const vec3& rhs) const
 	{
-		return vector3(x + rhs.x, y + rhs.y, z + rhs.z);
+		return vec3(x + rhs.x, y + rhs.y, z + rhs.z);
 	}
 
-	vector3 vector3::operator-(const vector3& rhs) const
+	vec3 vec3::operator-(const vec3& rhs) const
 	{
-		return vector3(x - rhs.x, y - rhs.y, z - rhs.z);
+		return vec3(x - rhs.x, y - rhs.y, z - rhs.z);
 	}
 
-	vector3 vector3::operator*(const vector3& rhs) const
+	vec3 vec3::operator*(const vec3& rhs) const
 	{
-		return vector3(x * rhs.x, y * rhs.y, z * rhs.z);
+		return vec3(x * rhs.x, y * rhs.y, z * rhs.z);
 	}
 
-	vector3& vector3::operator+=(float value)
+	vec3& vec3::operator+=(float value)
 	{
 		x += value;
 		y += value;
@@ -113,7 +111,7 @@ namespace gml
 		return *this;
 	}
 
-	vector3& vector3::operator-=(float value)
+	vec3& vec3::operator-=(float value)
 	{
 		x -= value;
 		y -= value;
@@ -121,7 +119,7 @@ namespace gml
 		return *this;
 	}
 
-	vector3& vector3::operator*=(float value)
+	vec3& vec3::operator*=(float value)
 	{
 		x *= value;
 		y *= value;
@@ -129,7 +127,7 @@ namespace gml
 		return *this;
 	}
 
-	vector3& vector3::operator+=(const vector3& rhs)
+	vec3& vec3::operator+=(const vec3& rhs)
 	{
 		x += rhs.x;
 		y += rhs.y;
@@ -137,7 +135,7 @@ namespace gml
 		return *this;
 	}
 
-	vector3& vector3::operator-=(const vector3& rhs)
+	vec3& vec3::operator-=(const vec3& rhs)
 	{
 		x -= rhs.x;
 		y -= rhs.y;
@@ -145,7 +143,7 @@ namespace gml
 		return *this;
 	}
 
-	vector3& vector3::operator*=(const vector3& rhs)
+	vec3& vec3::operator*=(const vec3& rhs)
 	{
 		x *= rhs.x;
 		y *= rhs.y;
@@ -153,18 +151,18 @@ namespace gml
 		return *this;
 	}
 
-	float& vector3::operator[](int index)
+	float& vec3::operator[](int index)
 	{
-		return const_cast<float&>(const_cast<const vector3*>(this)->operator[](index));
+		return const_cast<float&>(const_cast<const vec3*>(this)->operator[](index));
 	}
 
-	const float& vector3::operator[](int index) const
+	const float& vec3::operator[](int index) const
 	{
 		assert(index >= 0 && index < 3);
 		return *(&x + index);
 	}
 
-	vector3& vector3::set(float x, float y, float z)
+	vec3& vec3::set(float x, float y, float z)
 	{
 		this->x = x;
 		this->y = y;
@@ -172,19 +170,19 @@ namespace gml
 		return *this;
 	}
 
-	vector3& vector3::set(const vector4& vec4)
+	vec3& vec3::set(const vec4& vec4)
 	{
 		set(vec4.x, vec4.y, vec4.z);
 		return *this;
 	}
 
-	vector3 vector3::normalized() const
+	vec3 vec3::normalized() const
 	{
-		vector3 copy(*this);
+		vec3 copy(*this);
 		return copy.normalize();
 	}
 
-	vector3& vector3::normalize()
+	vec3& vec3::normalize()
 	{
 		float lengthrev = length();
 		if (!fequal(lengthrev, 0.0f))
@@ -201,7 +199,7 @@ namespace gml
 		return *this;
 	}
 	
-	vector3& vector3::clamp()
+	vec3& vec3::clamp()
 	{
 		if (x > 1.0f) x = 1.0f;
 		else if (x < 0.0f) x = 0.0f;
@@ -215,13 +213,13 @@ namespace gml
 		return *this;
 	}
 
-	vector3 vector3::clamped() const
+	vec3 vec3::clamped() const
 	{
-		vector3 copy(*this);
+		vec3 copy(*this);
 		return copy.clamp();
 	}
 
-	vector3& vector3::inverse()
+	vec3& vec3::inverse()
 	{
 		x = 1.0f / x;
 		y = 1.0f / y;
@@ -229,63 +227,63 @@ namespace gml
 		return *this;
 	}
 
-	vector3 vector3::inversed() const
+	vec3 vec3::inversed() const
 	{
-		vector3 copy(*this);
+		vec3 copy(*this);
 		return copy.inverse();
 	}
 
-	float vector3::length() const
+	float vec3::length() const
 	{
 		return sqrtf(x*x + y*y + z*z);
 	}
 
-	float vector3::length_sqr() const
+	float vec3::length_sqr() const
 	{
 		return x*x + y*y + z*z;
 	}
 
-	vector3 operator+(float value, const vector3& rhs)
+	vec3 operator+(float value, const vec3& rhs)
 	{
 		return rhs + value;
 	}
 
-	vector3 operator-(float value, const vector3& rhs)
+	vec3 operator-(float value, const vec3& rhs)
 	{
 		return rhs - value;
 	}
 
-	vector3 operator*(float value, const vector3& rhs)
+	vec3 operator*(float value, const vec3& rhs)
 	{
 		return rhs * value;
 	}
 
-	float dot(const vector3& lhs, const vector3& rhs)
+	float dot(const vec3& lhs, const vec3& rhs)
 	{
 		return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z;
 	}
 
-	vector3 cross(const vector3& lhs, const vector3& rhs)
+	vec3 cross(const vec3& lhs, const vec3& rhs)
 	{
-		return vector3(
+		return vec3(
 			lhs.y * rhs.z - lhs.z * rhs.y,
 			lhs.z * rhs.x - lhs.x * rhs.z,
 			lhs.x * rhs.y - lhs.y * rhs.x
 			);
 	}
 
-	vector3 min_combine(const vector3& lhs, const vector3& rhs)
+	vec3 min_combine(const vec3& lhs, const vec3& rhs)
 	{
-		return vector3(
+		return vec3(
 			lhs.x < rhs.x ? lhs.x : rhs.x,
 			lhs.y < rhs.y ? lhs.y : rhs.y,
 			lhs.z < rhs.z ? lhs.z : rhs.z
 			);
 	}
 
-	vector3 max_combine(const vector3& lhs, const vector3& rhs)
+	vec3 max_combine(const vec3& lhs, const vec3& rhs)
 	{
-		return vector3(
+		return vec3(
 			lhs.x > rhs.x ? lhs.x : rhs.x,
 			lhs.y > rhs.y ? lhs.y : rhs.y,
 			lhs.z > rhs.z ? lhs.z : rhs.z

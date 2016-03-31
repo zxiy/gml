@@ -31,7 +31,7 @@ namespace gml
 
 	}
 
-	bool aabb::is_contain(const gml::vector3& point) const
+	bool aabb::is_contain(const gml::vec3& point) const
 	{
 		if (!is_empty())
 		{
@@ -42,7 +42,7 @@ namespace gml
 		return false;
 	}
 
-	void aabb::expand(const vector3& point)
+	void aabb::expand(const vec3& point)
 	{
 		if (is_empty())
 		{
@@ -82,10 +82,10 @@ namespace gml
 
 	void aabb::clear()
 	{
-		m_min_bound = vector3::zero;
-		m_max_bound = vector3::zero;
-		m_center = vector3::zero;
-		m_extend = vector3::zero;
+		m_min_bound = vec3::zero;
+		m_max_bound = vec3::zero;
+		m_center = vec3::zero;
+		m_extend = vec3::zero;
 		m_is_empty = true;
 	}
 }

@@ -1,4 +1,4 @@
-#include "../include/matrix33.h"
+#include "../include/matrix.h"
 #include "../include/math_util.h"
 #include "inner_util.h"
 #include <cassert>
@@ -6,157 +6,157 @@
 
 namespace gml
 {
-	const matrix33 matrix33::I(
+	const mat33 mat33::I(
 		1.0f, 0.0f, 0.0f,
 		0.0f, 1.0f, 0.0f,
 		0.0f, 0.0f, 1.0f
 		);
 
-	matrix33 matrix33::rotate22(float radian)
+	mat33 mat33::rotate22(float radian)
 	{
 		float cosr = cosf(radian);
 		float sinr = sinf(radian);
-		return matrix33(
+		return mat33(
 			cosr, -sinr, 0,
 			sinr, cosr, 0,
 			0, 0, 1);
 	}
 
-	matrix33 matrix33::matrix33::scale22(float scaler)
+	mat33 mat33::mat33::scale22(float scaler)
 	{
-		return matrix33(
+		return mat33(
 			scaler, 0, 0,
 			0, scaler, 0,
 			0, 0, 1);
 	}
 
-	matrix33 matrix33::matrix33::scale22(float sx, float sy)
+	mat33 mat33::mat33::scale22(float sx, float sy)
 	{
-		return matrix33(
+		return mat33(
 			sx, 0, 0,
 			0, sy, 0,
 			0, 0, 1);
 	}
-	matrix33 matrix33::translate(float x, float y)
+	mat33 mat33::translate(float x, float y)
 	{
-		return matrix33(
+		return mat33(
 			1, 0, 0,
 			0, 1, 0,
 			x, y, 1);
 	}
 
-	matrix33 matrix33::flip22_x()
+	mat33 mat33::flip22_x()
 	{
-		return matrix33(
+		return mat33(
 			-1, 0, 0,
 			0, 1, 0,
 			0, 0, 1);
 	}
 
-	matrix33 matrix33::flip22_y()
+	mat33 mat33::flip22_y()
 	{
-		return matrix33(
+		return mat33(
 			1, 0, 0,
 			0, -1, 0,
 			0, 0, 1);
 	}
 
-	matrix33 matrix33::rotate33_x(float radian)
+	mat33 mat33::rotate33_x(float radian)
 	{
 		float cosr = cosf(radian);
 		float sinr = sinf(radian);
 
-		return matrix33(
+		return mat33(
 			1, 0, 0,
 			0, cosr, -sinr,
 			0, sinr, cosr
 			);
 	}
 
-	matrix33 matrix33::rotate33_y(float radian)
+	mat33 mat33::rotate33_y(float radian)
 	{
 		float cosr = cosf(radian);
 		float sinr = sinf(radian);
 
-		return matrix33(
+		return mat33(
 			cosr, 0, -sinr,
 			0, 1, 0,
 			sinr, 0, cosr
 			);
 	}
 
-	matrix33 matrix33::rotate33_z(float radian)
+	mat33 mat33::rotate33_z(float radian)
 	{
 		float cosr = cosf(radian);
 		float sinr = sinf(radian);
 
-		return matrix33(
+		return mat33(
 			cosr, -sinr, 0,
 			sinr, cosr, 0,
 			0, 0, 1
 			);
 	}
 
-	matrix33 matrix33::scale33(float scale)
+	mat33 mat33::scale33(float scale)
 	{
-		return matrix33(
+		return mat33(
 			scale, 0, 0,
 			0, scale, 0,
 			0, 0, scale
 			);
 	}
 
-	matrix33 matrix33::scale33(float sx, float sy, float sz)
+	mat33 mat33::scale33(float sx, float sy, float sz)
 	{
-		return matrix33(
+		return mat33(
 			sx, 0, 0,
 			0, sy, 0,
 			0, 0, sz
 			);
 	}
 
-	matrix33 matrix33::flip33_x()
+	mat33 mat33::flip33_x()
 	{
-		return matrix33(
+		return mat33(
 			-1, 0, 0,
 			0, 1, 0,
 			0, 0, 1
 			);
 	}
 
-	matrix33 matrix33::flip33_y()
+	mat33 mat33::flip33_y()
 	{
-		return matrix33(
+		return mat33(
 			1, 0, 0,
 			0, -1, 0,
 			0, 0, 1
 			);
 	}
 
-	matrix33 matrix33::flip33_z()
+	mat33 mat33::flip33_z()
 	{
-		return matrix33(
+		return mat33(
 			1, 0, 0,
 			0, 1, 0,
 			0, 0, -1
 			);
 	}
 
-	matrix33::matrix33() {}
+	mat33::mat33() {}
 
-	matrix33::matrix33(float _00, float _01, float _02, float _10, float _11, float _12, float _20, float _21, float _22)
+	mat33::mat33(float _00, float _01, float _02, float _10, float _11, float _12, float _20, float _21, float _22)
 	{
 		this->_00 = _00;	this->_01 = _01;	this->_02 = _02;
 		this->_10 = _10;	this->_11 = _11;	this->_12 = _12;
 		this->_20 = _20;	this->_21 = _21;	this->_22 = _22;
 	}
 
-	matrix33::matrix33(const matrix33& other)
+	mat33::mat33(const mat33& other)
 	{
 		*this = other;
 	}
 
-	matrix33& matrix33::operator=(const matrix33& rhs)
+	mat33& mat33::operator=(const mat33& rhs)
 	{
 		if (&rhs != this)
 		{
@@ -168,23 +168,23 @@ namespace gml
 		return *this;
 	}
 
-	matrix33 matrix33::operator*(float scaler) const
+	mat33 mat33::operator*(float scaler) const
 	{
-		matrix33 result(*this);
+		mat33 result(*this);
 		result *= scaler;
 		return result;
 	}
 
-	matrix33 matrix33::operator*(const matrix33& rhs) const
+	mat33 mat33::operator*(const mat33& rhs) const
 	{
-		matrix33 result(*this);
+		mat33 result(*this);
 		result *= rhs;
 		return result;
 	}
 
-	vector3 matrix33::operator* (const vector3& rhs) const
+	vec3 mat33::operator* (const vec3& rhs) const
 	{
-		vector3 result;
+		vec3 result;
 		for (int i = 0; i < 3; i++)
 		{
 			result[i] = dot(row[i], rhs);
@@ -192,7 +192,7 @@ namespace gml
 		return result;
 	}
 
-	matrix33& matrix33::operator*=(float scaler)
+	mat33& mat33::operator*=(float scaler)
 	{
 		for (int i = 0; i < 4; i++)
 		{
@@ -201,9 +201,9 @@ namespace gml
 		return *this;
 	}
 
-	matrix33& matrix33::operator*=(const matrix33& rhs)
+	mat33& mat33::operator*=(const mat33& rhs)
 	{
-		matrix33 copy(*this);
+		mat33 copy(*this);
 		for (int i = 0; i < 3; i++)
 		{
 			for (int j = 0; j < 3; j++)
@@ -214,7 +214,7 @@ namespace gml
 		return *this;
 	}
 
-	bool matrix33::operator== (const matrix33& rhs) const
+	bool mat33::operator== (const mat33& rhs) const
 	{
 		if (&rhs != this)
 		{
@@ -227,34 +227,34 @@ namespace gml
 		return true;
 	}
 
-	bool matrix33::operator!= (const matrix33& rhs) const
+	bool mat33::operator!= (const mat33& rhs) const
 	{
 		return !(*this == rhs);
 	}
 
-	float& matrix33::operator[] (int index)
+	float& mat33::operator[] (int index)
 	{
-		return const_cast<float&>(const_cast<const matrix33*>(this)->operator[](index));
+		return const_cast<float&>(const_cast<const mat33*>(this)->operator[](index));
 	}
 
-	const float& matrix33::operator[] (int index) const
+	const float& mat33::operator[] (int index) const
 	{
 		assert(index >= 0 && index < 16);
 		return *(&(m[0][0]) + index);
 	}
 
-	vector3 matrix33::col(int index) const
+	vec3 mat33::col(int index) const
 	{
 		assert(index >= 0 && index < 3);
-		return vector3(row[0][index], row[1][index], row[2][index]);
+		return vec3(row[0][index], row[1][index], row[2][index]);
 	}
 
-	matrix33& matrix33::identity()
+	mat33& mat33::identity()
 	{
 		return *this = I;
 	}
 
-	matrix33& matrix33::transpose()
+	mat33& mat33::transpose()
 	{
 		swap(this->_10, this->_01);
 		swap(this->_20, this->_02);
@@ -264,14 +264,14 @@ namespace gml
 		return *this;
 	}
 
-	matrix33 matrix33::transposed() const
+	mat33 mat33::transposed() const
 	{
-		matrix33 result(*this);
+		mat33 result(*this);
 		result.transpose();
 		return result;
 	}
 
-	bool matrix33::inverse()
+	bool mat33::inverse()
 	{
 		if (is_orthogonal())
 		{
@@ -283,7 +283,7 @@ namespace gml
 		if (!fequal(det, 0.0f))
 		{
 			det = 1.0f / det;
-			matrix33 copy(*this);
+			mat33 copy(*this);
 
 			//to-do det_impl is calculated above in determinant().
 			//try to gcd
@@ -304,7 +304,7 @@ namespace gml
 		return false;
 	}
 
-	bool matrix33::is_orthogonal() const
+	bool mat33::is_orthogonal() const
 	{
 		for (int i = 0; i < 3; i++)
 		{
@@ -322,7 +322,7 @@ namespace gml
 		return false;
 	}
 
-	float matrix33::determinant() const
+	float mat33::determinant() const
 	{
 		return determinant_impl(
 			_00, _01, _02,
@@ -330,14 +330,14 @@ namespace gml
 			_20, _21, _22);
 	}
 
-	matrix33 operator* (float scaler, const matrix33& rhs)
+	mat33 operator* (float scaler, const mat33& rhs)
 	{
 		return rhs * scaler;
 	}
 
-	vector3 operator* (const vector3& lhs, const matrix33& rhs)
+	vec3 operator* (const vec3& lhs, const mat33& rhs)
 	{
-		vector3 result;
+		vec3 result;
 		for (int i = 0; i < 3; i++)
 		{
 			result[i] = dot(lhs, rhs.col(i));
@@ -345,10 +345,10 @@ namespace gml
 		return result;
 	}
 
-	vector2 transform_vector(const matrix33& lhs, const vector2& rhs)
+	vec2 transform_vector(const mat33& lhs, const vec2& rhs)
 	{
-		vector2 result;
-		vector3 rhs3(rhs, 0);
+		vec2 result;
+		vec3 rhs3(rhs, 0);
 		for (int i = 0; i < 3; i++)
 		{
 			result[i] = dot(rhs3, lhs.col(i));
@@ -356,10 +356,10 @@ namespace gml
 		return result;
 	}
 
-	vector2 transform_point(const matrix33& lhs, const vector2& rhs)
+	vec2 transform_point(const mat33& lhs, const vec2& rhs)
 	{
-		vector2 result;
-		vector3 rhs3(rhs, 1);
+		vec2 result;
+		vec3 rhs3(rhs, 1);
 		for (int i = 0; i < 3; i++)
 		{
 			result[i] = dot(rhs3, lhs.col(i));

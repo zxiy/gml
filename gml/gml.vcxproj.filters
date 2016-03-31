@@ -15,37 +15,22 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\vector2.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\vector3.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\math_util.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\vector4.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\matrix44.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\swizzle.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="source\inner_util.h">
       <Filter>source</Filter>
     </ClInclude>
-    <ClInclude Include="include\matrix22.h">
-      <Filter>include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\matrix33.h">
-      <Filter>include</Filter>
-    </ClInclude>
     <ClInclude Include="include\ray.h">
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="include\aabb.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\vector.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\matrix.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

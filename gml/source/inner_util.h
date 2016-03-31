@@ -1,8 +1,6 @@
 #pragma once
 
-#include "../include/vector2.h"
-#include "../include/vector3.h"
-#include "../include/vector4.h"
+#include "../include/vector.h"
 
 namespace gml
 {

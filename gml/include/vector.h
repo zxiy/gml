@@ -21,11 +21,12 @@ namespace gml
 		float y = 0.0f;
 
 	public:
-		vec2(int) = delete;
-
 		vec2();
+
 		vec2(float x, float y);
+
 		vec2(const vec2& other);
+
 		explicit vec2(const vec3& vec3);
 
 		vec2 operator-() const;
@@ -105,8 +106,6 @@ namespace gml
 		float z = 0.0f;
 
 	public:
-		vec3(int) = delete;
-
 		vec3();
 
 		vec3(float x, float y, float z);
@@ -184,8 +183,6 @@ namespace gml
 		float w = 0.0f;
 
 	public:
-		vec4(int) = delete;
-
 		vec4();
 
 		vec4(float x, float y, float z, float w);
@@ -210,6 +207,10 @@ namespace gml
 		vec4& set(float x, float y, float z, float w);
 
 		vec4& replace(const vec3& vec3);
+
+		float length() const;
+
+		float length_sqr() const;
 	};
 
 	//vec2

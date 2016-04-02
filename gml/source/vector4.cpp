@@ -1,6 +1,7 @@
 #include "../include/vector.h"
 #include "../include/math_util.h"
 #include <cassert>
+#include <cmath>
 
 namespace gml
 {
@@ -78,6 +79,16 @@ namespace gml
 		this->y = vec3.y;
 		this->z = vec3.z;
 		return *this;
+	}
+
+	float vec4::length() const
+	{
+		return sqrtf(x*x + y*y + z*z + w*w);
+	}
+
+	float vec4::length_sqr() const
+	{
+		return x*x + y*y + z*z + w*w;
 	}
 
 	float dot(const vec4& lhs, const vec4& rhs)

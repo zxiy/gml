@@ -242,8 +242,14 @@ namespace gml
 		return result;
 	}
 
-	bool mat44::inverse()
+	bool mat44::invert()
 	{
+		if (is_orthogonal())
+		{
+			transpose();
+			return true;
+		}
+
 		float det = determinant();
 		if (!fequal(det, 0.0f))
 		{
@@ -275,6 +281,24 @@ namespace gml
 			return true;
 		}
 
+		return false;
+	}
+
+	bool mat44::is_orthogonal() const
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			if (!fequal(row[i].length_sqr(), 1.0f))
+			{
+				return false;
+			}
+
+			for (int j = i + 1; j < 4; j++)
+			{
+				if (!fequal(dot(row[i], row[j]), 0.0f))
+					return false;
+			}
+		}
 		return false;
 	}
 

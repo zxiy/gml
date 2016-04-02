@@ -271,7 +271,7 @@ namespace gml
 		return result;
 	}
 
-	bool mat33::inverse()
+	bool mat33::invert()
 	{
 		if (is_orthogonal())
 		{

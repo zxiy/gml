@@ -172,7 +172,7 @@ namespace gml
 		return result;
 	}
 
-	bool mat22::inverse()
+	bool mat22::invert()
 	{
 		if (is_orthogonal())
 		{

@@ -32,7 +32,7 @@ namespace gml
 
 		mat22();
 
-		explicit mat22(float _00, float _01, float _10, float _11);
+		mat22(float _00, float _01, float _10, float _11);
 
 		mat22(const mat22& other);
 
@@ -64,7 +64,7 @@ namespace gml
 
 		mat22 transposed() const;
 
-		bool inverse();
+		bool invert();
 
 		bool is_orthogonal() const;
 
@@ -113,7 +113,7 @@ namespace gml
 
 		mat33();
 
-		explicit mat33(float _00, float _01, float _02, float _10, float _11, float _12, float _20, float _21, float _22);
+		mat33(float _00, float _01, float _02, float _10, float _11, float _12, float _20, float _21, float _22);
 
 		mat33(const mat33& other);
 
@@ -145,7 +145,7 @@ namespace gml
 
 		mat33 transposed() const;
 
-		bool inverse();
+		bool invert();
 
 		bool is_orthogonal() const;
 
@@ -185,7 +185,7 @@ namespace gml
 
 		mat44();
 
-		explicit mat44(float _00, float _01, float _02, float _03, float _10, float _11, float _12, float _13, float _20, float _21, float _22, float _23, float _30, float _31, float _32, float _33);
+		mat44(float _00, float _01, float _02, float _03, float _10, float _11, float _12, float _13, float _20, float _21, float _22, float _23, float _30, float _31, float _32, float _33);
 
 		mat44(const mat44& other);
 
@@ -217,7 +217,9 @@ namespace gml
 
 		mat44 transposed() const;
 
-		bool inverse();
+		bool invert();
+
+		bool is_orthogonal() const;
 
 		float determinant() const;
 	};

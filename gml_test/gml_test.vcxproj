@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{EE9B147F-DD18-4AF2-AC09-F49633E3A092}</ProjectGuid>
-    <RootNamespace>tmltest</RootNamespace>
+    <RootNamespace>gml_test</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
     <ProjectName>gml_test</ProjectName>
   </PropertyGroup>

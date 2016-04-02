@@ -39,7 +39,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{C384FDDC-5910-4E73-915D-7B520A068163}</ProjectGuid>
-    <RootNamespace>tml</RootNamespace>
+    <RootNamespace>gml</RootNamespace>
     <ProjectName>gml</ProjectName>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>

@@ -21,7 +21,7 @@ namespace gml
 	{
 		set(other.x, other.y, other.z, other.w);
 	}
-
+	
 	vec4& vec4::operator=(const vec4& rhs)
 	{
 		if (&rhs != this)
@@ -45,6 +45,65 @@ namespace gml
 	bool vec4::operator!=(const vec4& rhs) const
 	{
 		return !(*this == rhs);
+	}
+
+	vec4 vec4::operator+(float value) const
+	{
+		vec4 copy(*this);
+		copy += value;
+		return copy;
+	}
+
+	vec4 vec4::operator*(float value) const
+	{
+		vec4 copy(*this);
+		copy *= value;
+		return copy;
+	}
+
+	vec4 vec4::operator+(const vec4& rhs) const
+	{
+		return vec4(x + rhs.x, y + rhs.y, z + rhs.z , w + rhs.w);
+	}
+
+	vec4 vec4::operator*(const vec4& rhs) const
+	{
+		return vec4(x * rhs.x, y * rhs.y, z * rhs.z, w * rhs.w);
+	}
+	vec4& vec4::operator+=(float value)
+	{
+		x += value;
+		y += value;
+		z += value;
+		w += value;
+		return *this;
+	}
+
+	vec4& vec4::operator*=(float value)
+	{
+		x *= value;
+		y *= value;
+		z *= value;
+		w *= value;
+		return *this;
+	}
+
+	vec4& vec4::operator+=(const vec4& rhs)
+	{
+		x += rhs.x;
+		y += rhs.y;
+		z += rhs.z;
+		w += rhs.w;
+		return *this;
+	}
+	
+	vec4& vec4::operator*=(const vec4& rhs)
+	{
+		x *= rhs.x;
+		y *= rhs.y;
+		z *= rhs.z;
+		w *= rhs.w;
+		return *this;
 	}
 
 	//hack
@@ -89,6 +148,16 @@ namespace gml
 	float vec4::length_sqr() const
 	{
 		return x*x + y*y + z*z + w*w;
+	}
+
+	vec4 operator+(float value, const vec4& rhs)
+	{
+		return rhs + value;
+	}
+	
+	vec4 operator*(float value, const vec4& rhs)
+	{
+		return rhs * value;
 	}
 
 	float dot(const vec4& lhs, const vec4& rhs)

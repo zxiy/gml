@@ -190,12 +190,28 @@ namespace gml
 		vec4(const vec3& vec3, float w);
 
 		vec4(const vec4& other);
-
+		
 		vec4& operator=(const vec4& rhs);
 
 		bool operator==(const vec4& rhs) const;
 
 		bool operator!=(const vec4& rhs) const;
+
+		vec4 operator+(float value) const;
+
+		vec4 operator*(float value) const;
+
+		vec4 operator+(const vec4& rhs) const;
+
+		vec4 operator*(const vec4& rhs) const;
+
+		vec4& operator+=(float value);
+
+		vec4& operator*=(float value);
+
+		vec4& operator+=(const vec4& rhs);
+
+		vec4& operator*=(const vec4& rhs);
 
 		//hack
 		float& operator[](int index);
@@ -244,6 +260,10 @@ namespace gml
 	vec3 max_combine(const vec3& lhs, const vec3& rhs);
 
 	//vec4
+	vec4 operator+(float value, const vec4& rhs);
+
+	vec4 operator*(float value, const vec4& rhs);
+
 	float dot(const vec4& lhs, const vec4& rhs);
 
 	//swizzle

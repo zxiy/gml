@@ -33,6 +33,9 @@
     <ClInclude Include="include\matrix.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\color.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\vector2.cpp">
@@ -60,6 +63,12 @@
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="source\aabb.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\color4.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\color3.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>

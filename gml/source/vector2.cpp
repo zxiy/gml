@@ -21,11 +21,6 @@ namespace gml
 		set(x, y);
 	}
 
-	vec2::vec2(const vec2& other)
-	{
-		set(other.x, other.y);
-	}
-
 	vec2::vec2(const vec3& vec3)
 	{
 		set(vec3.x, vec3.y);
@@ -35,16 +30,7 @@ namespace gml
 	{
 		return vec2(-x, -y);
 	}
-
-	vec2& vec2::operator=(const vec2& rhs)
-	{
-		if (&rhs == this)
-			return *this;
-
-		set(rhs.x, rhs.y);
-		return *this;
-	}
-
+	
 	bool vec2::operator==(const vec2& rhs) const
 	{
 		if (&rhs == this)
@@ -150,6 +136,11 @@ namespace gml
 		return *(&x + index);
 	}
 
+	vec2::operator float*()
+	{
+		return &(this->x);
+	}
+
 	vec2& vec2::set(float x, float y)
 	{
 		this->x = x;
@@ -183,24 +174,6 @@ namespace gml
 			*this = zero;
 		}
 		return *this;
-	}
-
-	vec2& vec2::clamp()
-	{
-		if (x > 1.0f) x = 1.0f;
-		else if (x < 0.0f) x = 0.0f;
-
-		if (y > 1.0f) y = 1.0f;
-		else if (y < 0.0f) y = 0.0f;
-
-		return *this;
-	}
-
-	vec2 vec2::clamped() const
-	{
-		vec2 copy(*this);
-
-		return copy.clamp();
 	}
 
 	vec2& vec2::inverse()

@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\aabb.h" />
+    <ClInclude Include="include\color.h" />
     <ClInclude Include="include\math_util.h" />
     <ClInclude Include="include\matrix.h" />
     <ClInclude Include="include\ray.h" />
@@ -28,6 +29,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\aabb.cpp" />
+    <ClCompile Include="source\color3.cpp" />
+    <ClCompile Include="source\color4.cpp" />
     <ClCompile Include="source\math_util.cpp" />
     <ClCompile Include="source\matrix22.cpp" />
     <ClCompile Include="source\matrix33.cpp" />

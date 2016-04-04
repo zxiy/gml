@@ -23,33 +23,19 @@ namespace gml
 		set(x, y, z);
 	}
 
-	vec3::vec3(const vec2& vec2, float z)
+	vec3::vec3(const vec2& v2, float z)
 	{
-		set(vec2.x, vec2.y, z);
+		set(v2.x, v2.y, z);
 	}
 
-	vec3::vec3(const vec3& other)
+	vec3::vec3(const vec4& v4)
 	{
-		set(other.x, other.y, other.z);
+		set(v4.x, v4.y, v4.z);
 	}
-
-	vec3::vec3(const vec4& vec4)
-	{
-		set(vec4.x, vec4.y, vec4.z);
-	}
-
+	
 	vec3 vec3::operator-() const
 	{
 		return vec3(-x, -y, -z);
-	}
-
-	vec3& vec3::operator=(const vec3& rhs)
-	{
-		if (&rhs != this)
-		{
-			set(rhs.x, rhs.y, rhs.z);
-		}
-		return *this;
 	}
 
 	bool vec3::operator==(const vec3& rhs) const
@@ -162,6 +148,11 @@ namespace gml
 		return *(&x + index);
 	}
 
+	vec3::operator float*()
+	{
+		return &(this->x);
+	}
+
 	vec3& vec3::set(float x, float y, float z)
 	{
 		this->x = x;
@@ -170,9 +161,16 @@ namespace gml
 		return *this;
 	}
 
-	vec3& vec3::set(const vec4& vec4)
+	vec3& vec3::set(const vec4& v4)
 	{
-		set(vec4.x, vec4.y, vec4.z);
+		set(v4.x, v4.y, v4.z);
+		return *this;
+	}
+
+	vec3& vec3::replace(const vec2& v2)
+	{
+		x = v2.x;
+		y = v2.y;
 		return *this;
 	}
 
@@ -199,26 +197,6 @@ namespace gml
 		return *this;
 	}
 	
-	vec3& vec3::clamp()
-	{
-		if (x > 1.0f) x = 1.0f;
-		else if (x < 0.0f) x = 0.0f;
-
-		if (y > 1.0f) y = 1.0f;
-		else if (y < 0.0f) y = 0.0f;
-
-		if (z > 1.0f) z = 1.0f;
-		else if (z < 0.0f) z = 0.0f;
-
-		return *this;
-	}
-
-	vec3 vec3::clamped() const
-	{
-		vec3 copy(*this);
-		return copy.clamp();
-	}
-
 	vec3& vec3::inverse()
 	{
 		x = 1.0f / x;

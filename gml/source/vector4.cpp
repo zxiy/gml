@@ -12,23 +12,9 @@ namespace gml
 		set(x, y, z, w);
 	}
 
-	vec4::vec4(const vec3& vec3, float w)
+	vec4::vec4(const vec3& v3, float w)
 	{
-		set(vec3.x, vec3.y, vec3.z, w);
-	}
-
-	vec4::vec4(const vec4& other)
-	{
-		set(other.x, other.y, other.z, other.w);
-	}
-	
-	vec4& vec4::operator=(const vec4& rhs)
-	{
-		if (&rhs != this)
-		{
-			set(rhs.x, rhs.y, rhs.z, rhs.w);
-		}
-		return *this;
+		set(v3.x, v3.y, v3.z, w);
 	}
 
 	bool vec4::operator==(const vec4& rhs) const
@@ -45,65 +31,6 @@ namespace gml
 	bool vec4::operator!=(const vec4& rhs) const
 	{
 		return !(*this == rhs);
-	}
-
-	vec4 vec4::operator+(float value) const
-	{
-		vec4 copy(*this);
-		copy += value;
-		return copy;
-	}
-
-	vec4 vec4::operator*(float value) const
-	{
-		vec4 copy(*this);
-		copy *= value;
-		return copy;
-	}
-
-	vec4 vec4::operator+(const vec4& rhs) const
-	{
-		return vec4(x + rhs.x, y + rhs.y, z + rhs.z , w + rhs.w);
-	}
-
-	vec4 vec4::operator*(const vec4& rhs) const
-	{
-		return vec4(x * rhs.x, y * rhs.y, z * rhs.z, w * rhs.w);
-	}
-	vec4& vec4::operator+=(float value)
-	{
-		x += value;
-		y += value;
-		z += value;
-		w += value;
-		return *this;
-	}
-
-	vec4& vec4::operator*=(float value)
-	{
-		x *= value;
-		y *= value;
-		z *= value;
-		w *= value;
-		return *this;
-	}
-
-	vec4& vec4::operator+=(const vec4& rhs)
-	{
-		x += rhs.x;
-		y += rhs.y;
-		z += rhs.z;
-		w += rhs.w;
-		return *this;
-	}
-	
-	vec4& vec4::operator*=(const vec4& rhs)
-	{
-		x *= rhs.x;
-		y *= rhs.y;
-		z *= rhs.z;
-		w *= rhs.w;
-		return *this;
 	}
 
 	//hack
@@ -132,11 +59,11 @@ namespace gml
 		return *this;
 	}
 
-	vec4& vec4::replace(const vec3& vec3)
+	vec4& vec4::replace(const vec3& v3)
 	{
-		this->x = vec3.x;
-		this->y = vec3.y;
-		this->z = vec3.z;
+		this->x = v3.x;
+		this->y = v3.y;
+		this->z = v3.z;
 		return *this;
 	}
 
@@ -148,16 +75,6 @@ namespace gml
 	float vec4::length_sqr() const
 	{
 		return x*x + y*y + z*z + w*w;
-	}
-
-	vec4 operator+(float value, const vec4& rhs)
-	{
-		return rhs + value;
-	}
-	
-	vec4 operator*(float value, const vec4& rhs)
-	{
-		return rhs * value;
 	}
 
 	float dot(const vec4& lhs, const vec4& rhs)

@@ -1,5 +1,6 @@
 #include <gml/include/vector.h>
 #include <gml/include/matrix.h>
+#include <gml/include/color.h>
 #include <gml/include/math_util.h>
 
 
@@ -13,6 +14,7 @@ void TestVeoctorSwizzle();
 void TestMatrix22();
 void TestMatrix33();
 void TestMatrix44();
+void TestColor();
 void TestStructure();
 
 //#define WRITE_TO_FILE
@@ -53,6 +55,9 @@ int main()
 
 	OUTPUT << "# test matrix44 \n";
 	TestMatrix44();
+
+	OUTPUT << "# test color\n";
+	TestColor();
 
 #ifndef WRITE_TO_FILE
 	getchar();
@@ -115,9 +120,6 @@ void TestVector2()
 
 	a = b.inversed();
 	OUTPUT << "  b = <" << a.x << "," << a.y << ">\n";
-	a.clamp();
-	OUTPUT << "  b.clmap = <" << a.x << "," << a.y << ">\n";
-
 
 	OUTPUT << "  cross(b,b) = <" << cross(b, c) << ">\n";
 	OUTPUT << "  cross(b,vec2::one) = <"
@@ -165,8 +167,6 @@ void TestVector3()
 
 	a = b.inversed();
 	OUTPUT << "  b = <" << a.x << "," << a.y << "," << a.z << ">\n";
-	a.clamp();
-	OUTPUT << "  b.clmap = <" << a.x << "," << a.y << "," << a.z << ">\n";
 
 	a = cross(b, c);
 	OUTPUT << "  cross(b,b) = <" << a.x << "," << a.y << "," << a.z << ">\n";
@@ -207,28 +207,28 @@ void TestVeoctorSwizzle()
 	//a = vec3;
 	a = vec2(v3);
 
-	a = swizzle<y, x>(v2);
+	a = swizzle<Y, X>(v2);
 	OUTPUT << "\tvec2.yx = <" << a.x << ", " << a.y << ">\n";
-	a = swizzle<y, z>(v3);
+	a = swizzle<Y, Z>(v3);
 	OUTPUT << "\tvec3.yz = <" << a.x << ", " << a.y << ">\n";
-	a = swizzle<w, w>(v4);
+	a = swizzle<W, W>(v4);
 	OUTPUT << "\tvec4.ww = <" << a.x << ", " << a.y << ">\n\n";
 
 	//b = vec4;
 	b = vec3(v4);
 
-	b = swizzle<y, x, y>(v2);
+	b = swizzle<Y, X, Y>(v2);
 	OUTPUT << "\tvec2.yxy = <" << b.x << ", " << b.y << ", " << b.z << ">\n";
-	b = swizzle<y, z, x>(v3);
+	b = swizzle<Y, Z, X>(v3);
 	OUTPUT << "\tvec3.yzx = <" << b.x << ", " << b.y << ", " << b.z << ">\n";
-	b = swizzle<w, w, x>(v4);
+	b = swizzle<W, W, X>(v4);
 	OUTPUT << "\tvec4.wwx = <" << b.x << ", " << b.y << ", " << b.z << ">\n\n";
 
-	c = swizzle<y, x, x, y>(v2);
+	c = swizzle<Y, X, X, Y>(v2);
 	OUTPUT << "\tvec2.yxxy = <" << c.x << ", " << c.y << ", " << c.z << ", " << c.w << ">\n";
-	c = swizzle<y, z, x, z>(v3);
+	c = swizzle<Y, Z, X, Z>(v3);
 	OUTPUT << "\tvec3.yzxz = <" << c.x << ", " << c.y << ", " << c.z << ", " << c.w << ">\n";
-	c = swizzle<z, z, w, y>(v4);
+	c = swizzle<Z, Z, W, Y>(v4);
 	OUTPUT << "\tvec4.zzwy = <" << c.x << ", " << c.y << ", " << c.z << ", " << c.w << ">\n\n";
 }
 
@@ -327,7 +327,9 @@ void TestStructure()
 	OUTPUT << "\tsizeof(vec4)   = " << sizeof(vec4) << std::endl;
 	OUTPUT << "\tsizeof(mat22)  = " << sizeof(mat22) << std::endl;
 	OUTPUT << "\tsizeof(mat33)  = " << sizeof(mat33) << std::endl;
-	OUTPUT << "\tsizeof(mat44)  = " << sizeof(mat44) << std::endl << std::endl;
+	OUTPUT << "\tsizeof(mat44)  = " << sizeof(mat44) << std::endl;
+	OUTPUT << "\tsizeof(color_rgb)  = " << sizeof(color3) << std::endl;
+	OUTPUT << "\tsizeof(color_rgba) = " << sizeof(color4) << std::endl << std::endl;
 
 	OUTPUT << "## list initializer & union data validation" << std::endl;
 
@@ -339,7 +341,7 @@ void TestStructure()
 	OUTPUT << "\tv3={1,2,3}   = <" << v3.x << "," << v3.y << "," << v3.z << ">" << std::endl;
 	OUTPUT << "\tv3={1,2,3}   = <" << v3[0] << "," << v3[1] << "," << v3[2] << ">" << std::endl;
 
-	vec4 v4 = { 1,2,3,4};
+	vec4 v4 = { 1,2,3,4 };
 	OUTPUT << "\tv4={1,2,3,4} = <" << v4.x << "," << v4.y << "," << v4.z << "," << v4.w << ">" << std::endl;
 	OUTPUT << "\tv4={1,2,3,4} = <" << v4[0] << "," << v4[1] << "," << v4[2] << "," << v4[3] << ">" << std::endl;
 
@@ -349,7 +351,7 @@ void TestStructure()
 	OUTPUT << "\tm2={1,2,3,4} = |" << m2.row[0].x << "," << m2.row[0].y << "," << m2.row[1].x << "," << m2.row[0].y << "|" << std::endl;
 
 	mat33 m3 = { 1,2,3,4,5,6,7,8,9 };
-	OUTPUT << "\tm3={ 1,2,3,4,5,6,7,8,9 } = |" 
+	OUTPUT << "\tm3={ 1,2,3,4,5,6,7,8,9 } = |"
 		<< m3._00 << "," << m3._01 << "," << m3._02 << ","
 		<< m3._10 << "," << m3._11 << "," << m3._12 << ","
 		<< m3._20 << "," << m3._21 << "," << m3._22 << "|"
@@ -365,7 +367,7 @@ void TestStructure()
 		<< m3.row[2].x << "," << m3.row[2].y << "," << m3.row[2].z << "|"
 		<< std::endl;
 
-	mat44 m4({1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16});
+	mat44 m4({ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16 });
 	OUTPUT << "\tm4({1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16}) = |"
 		<< m4._00 << "," << m4._01 << "," << m4._02 << "," << m4._03 << ","
 		<< m4._10 << "," << m4._11 << "," << m4._12 << "," << m4._13 << ","
@@ -384,4 +386,9 @@ void TestStructure()
 		<< m4.row[2].x << "," << m4.row[2].y << "," << m4.row[2].z << "," << m4.row[2].w << ","
 		<< m4.row[3].x << "," << m4.row[3].y << "," << m4.row[3].z << "," << m4.row[3].w << "|"
 		<< std::endl << std::endl;
+}
+
+void TestColor()
+{
+	color4 b = { color3::white, 1.0 };
 }

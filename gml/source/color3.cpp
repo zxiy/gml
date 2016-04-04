@@ -40,9 +40,9 @@ namespace gml
 
 	color3::color3(unsigned int _rgb)
 	{
-		r = (_rgb & 0xF) / 255.0f;
-		g = ((_rgb >> 4) & 0xF) / 255.0f;
-		b = ((_rgb >> 8) & 0xF) / 255.0f;
+		r = (_rgb & 0xFF) / 255.0f;
+		g = ((_rgb >> 8) & 0xFF) / 255.0f;
+		b = ((_rgb >> 16) & 0xFF) / 255.0f;
 	}
 
 	bool color3::operator==(const color3& rhs) const
@@ -175,7 +175,7 @@ namespace gml
 		if (ng > 255) ng = 255;
 		if (nb > 255) nb = 255;
 
-		return nr & (ng << 4) & (nb << 8);
+		return nr | (ng << 8) | (nb << 16);
 	}
 
 	color3 operator+(float value, const color3& rhs)

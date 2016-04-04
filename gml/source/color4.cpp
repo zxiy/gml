@@ -33,10 +33,10 @@ namespace gml
 
 	color4::color4(unsigned int _rgba)
 	{
-		r = (_rgba & 0xF) / 255.0f;
-		g = ((_rgba >> 4) & 0xF) / 255.0f;
-		b = ((_rgba >> 8) & 0xF) / 255.0f;
-		a = ((_rgba >> 16) & 0xF) / 255.0f;
+		r = (_rgba & 0xFF) / 255.0f;
+		g = ((_rgba >> 8) & 0xFF) / 255.0f;
+		b = ((_rgba >> 16) & 0xFF) / 255.0f;
+		a = ((_rgba >> 24) & 0xFF) / 255.0f;
 	}
 
 	bool color4::operator==(const color4& rhs) const
@@ -183,7 +183,7 @@ namespace gml
 		if (nb > 255) nb = 255;
 		if (na > 255) na = 255;
 
-		return nr & (ng << 4) & (nb << 8) & (na << 16);
+		return nr | (ng << 8) | (nb << 16) | (na << 24);
 	}
 
 	color4 operator+(float value, const color4& rhs)

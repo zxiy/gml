@@ -5,6 +5,16 @@
 
 namespace gml
 {
+	const color4 color4::black(0, 0, 0, 1);
+	const color4 color4::gray(0.5f, 0.5f, 0.5f, 1);
+	const color4 color4::white(1, 1, 1, 1);
+	const color4 color4::red(1, 0, 0, 1);
+	const color4 color4::green(0, 1, 0, 1);
+	const color4 color4::blue(0, 0, 1, 1);
+	const color4 color4::yellow(1, 1, 0,1);
+	const color4 color4::cyan(0, 1, 1,1);
+	const color4 color4::purple(1, 0, 1,1);
+
 	color4 color4::random()
 	{
 		return (color4(rand() * 1.0f, rand() * 1.0f, rand() * 1.0f, rand() * 1.0f) * (1.0f / RAND_MAX));

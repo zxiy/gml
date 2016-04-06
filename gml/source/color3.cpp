@@ -6,6 +6,7 @@
 namespace gml
 {
 	const color3 color3::black(0, 0, 0);
+	const color3 color3::gray(0.5f, 0.5f, 0.5f);
 	const color3 color3::white(1, 1, 1);
 	const color3 color3::red(1, 0, 0);
 	const color3 color3::green(0, 1, 0);

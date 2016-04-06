@@ -4,11 +4,13 @@ namespace gml
 {
 	class color3;
 	class color4;
+	class color4;
 
 	class color3
 	{
 	public:
 		static const color3 black;
+		static const color3 gray;
 		static const color3 white;
 		static const color3 red;
 		static const color3 green;
@@ -73,13 +75,22 @@ namespace gml
 	class color4
 	{
 	public:
+		static const color4 black;
+		static const color4 gray;
+		static const color4 white;
+		static const color4 red;
+		static const color4 green;
+		static const color4 blue;
+		static const color4 yellow;
+		static const color4 cyan;
+		static const color4 purple;
 		static color4 random();
 
 	public:
 		float r = 0.0f;
 		float g = 0.0f;
 		float b = 0.0f;
-		float a = 0.0f;
+		float a = 1.0f;
 
 	public:
 		color4();

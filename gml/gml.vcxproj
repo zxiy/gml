@@ -24,6 +24,7 @@
     <ClInclude Include="include\math_util.h" />
     <ClInclude Include="include\matrix.h" />
     <ClInclude Include="include\ray.h" />
+    <ClInclude Include="include\rect.h" />
     <ClInclude Include="include\vector.h" />
     <ClInclude Include="source\inner_util.h" />
   </ItemGroup>
@@ -31,11 +32,13 @@
     <ClCompile Include="source\aabb.cpp" />
     <ClCompile Include="source\color3.cpp" />
     <ClCompile Include="source\color4.cpp" />
+    <ClCompile Include="source\coord.cpp" />
     <ClCompile Include="source\math_util.cpp" />
     <ClCompile Include="source\matrix22.cpp" />
     <ClCompile Include="source\matrix33.cpp" />
     <ClCompile Include="source\matrix44.cpp" />
     <ClCompile Include="source\ray.cpp" />
+    <ClCompile Include="source\rect.cpp" />
     <ClCompile Include="source\vector2.cpp" />
     <ClCompile Include="source\vector3.cpp" />
     <ClCompile Include="source\vector4.cpp" />

@@ -36,6 +36,9 @@
     <ClInclude Include="include\color.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\rect.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\vector2.cpp">
@@ -69,6 +72,12 @@
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="source\color3.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\coord.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\rect.cpp">
       <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>

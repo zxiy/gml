@@ -19,7 +19,7 @@ namespace gml
 
 	int rect::bottom()
 	{
-		return left() + height();
+		return top() + height();
 	}
 
 	int rect::width()
@@ -97,7 +97,7 @@ namespace gml
 
 	bool rect::hit_test(int x, int y)
 	{
-		return !(x<left() || x > right() || y < top() || y > bottom());
+		return !(x < left() || x > right() || y < top() || y > bottom());
 	}
 
 	bool rect::hit_test(const coord& point)

@@ -21,4 +21,24 @@ namespace gml
 	{
 		T tmp = a; a = b; b = tmp;
 	}
+
+	template<typename T>
+	inline T clamp01(T value)
+	{
+		if (value < T(0))
+			return T(0);
+		else if (value > T(1))
+			return T(1);
+		return value;
+	}
+
+	template<typename T>
+	inline T clamp(T value, T minValue, T maxValue)
+	{
+		if (value < T(minValue))
+			return T(minValue);
+		else if (value > T(maxValue))
+			return T(maxValue);
+		return value;
+	}
 }

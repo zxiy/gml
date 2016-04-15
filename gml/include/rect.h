@@ -35,9 +35,9 @@ namespace gml
 
 		coord center();
 
-		coord get_pos();
+		coord position();
 
-		coord get_size();
+		coord size();
 		
 		rect& set_width(int w);
 

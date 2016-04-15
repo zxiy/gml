@@ -37,12 +37,12 @@ namespace gml
 		return coord((left() + right()) / 2, (top() + bottom()) / 2);
 	}
 
-	coord rect::get_pos()
+	coord rect::position()
 	{
 		return m_pos;
 	}
 
-	coord rect::get_size()
+	coord rect::size()
 	{
 		return m_size;
 	}

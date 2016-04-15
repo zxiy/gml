@@ -2,47 +2,47 @@
 
 namespace gml
 {
-	int rect::left()
+	int rect::left() const
 	{
 		return m_pos.x;
 	}
 
-	int rect::right()
+	int rect::right() const
 	{
 		return left() + width();
 	}
 
-	int rect::top()
+	int rect::top() const
 	{
 		return m_pos.y;
 	}
 
-	int rect::bottom()
+	int rect::bottom() const
 	{
 		return top() + height();
 	}
 
-	int rect::width()
+	int rect::width() const
 	{
 		return m_size.x;
 	}
 
-	int rect::height()
+	int rect::height() const
 	{
 		return m_size.y;
 	}
 
-	coord rect::center()
+	coord rect::center() const
 	{
 		return coord((left() + right()) / 2, (top() + bottom()) / 2);
 	}
 
-	coord rect::position()
+	coord rect::position() const
 	{
 		return m_pos;
 	}
 
-	coord rect::size()
+	coord rect::size() const
 	{
 		return m_size;
 	}
@@ -95,14 +95,39 @@ namespace gml
 		return set_size(size.x, size.y);
 	}
 
-	bool rect::hit_test(int x, int y)
+	bool rect::hit_test(int x, int y) const
 	{
 		return !(x < left() || x > right() || y < top() || y > bottom());
 	}
 
-	bool rect::hit_test(const coord& point)
+	bool rect::hit_test(const coord& point) const
 	{
 		return hit_test(point.x, point.y);
+	}
+
+	int rect::hit_test(const rect& other) const
+	{
+		int intersect_other = 0;
+		if (other.hit_test(left(),  top()))		intersect_other++;
+		if (other.hit_test(left(),  bottom()))	intersect_other++;
+		if (other.hit_test(right(), top()))		intersect_other++;
+		if (other.hit_test(right(), bottom()))	intersect_other++;
+
+		if (intersect_other == 0)
+			return outside;
+		else if (intersect_other == 4)
+			return inside;
+
+		intersect_other = 0;
+		if (hit_test(other.left(),  other.top()))		intersect_other++;
+		if (hit_test(other.left(),  other.bottom()))	intersect_other++;
+		if (hit_test(other.right(), other.top()))		intersect_other++;
+		if (hit_test(other.right(), other.bottom()))	intersect_other++;
+
+		if (intersect_other == 4)
+			return contain;
+		else //
+			return intersect;
 	}
 
 	rect& rect::move(int offsetx, int offsety)

@@ -2,6 +2,14 @@
 
 namespace gml
 {
+	typedef enum HIT_TYPE
+	{
+		outside		= 0,
+		intersect	= 1,
+		contain		= 2,
+		inside		= 3,
+	} HIT_TYPE;
+
 	class coord
 	{
 	public:
@@ -21,23 +29,23 @@ namespace gml
 	class rect
 	{
 	public:
-		int left();
+		int left() const;
 
-		int right();
+		int right() const;
 
-		int top();
+		int top() const;
 
-		int bottom();
+		int bottom() const;
 
-		int width();
+		int width() const;
 
-		int height();
+		int height() const;
 
-		coord center();
+		coord center() const;
 
-		coord position();
+		coord position() const;
 
-		coord size();
+		coord size() const;
 		
 		rect& set_width(int w);
 
@@ -55,9 +63,11 @@ namespace gml
 
 		rect& set_size(const coord& size);
 
-		bool hit_test(int x, int y);
+		bool hit_test(int x, int y) const;
 
-		bool hit_test(const coord& point);
+		bool hit_test(const coord& point) const;
+
+		int hit_test(const rect& other) const;
 
 		rect& move(int offsetx, int offsety);
 		

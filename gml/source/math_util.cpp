@@ -25,7 +25,7 @@ namespace gml
 		int eb = get_float_exponent_base2(b);
 		int ediff = get_float_exponent_base2(a - b);
 
-		return ((ediff - eb < -22) && (ediff - ea < -22));
+		return ((ediff - eb < -20) && (ediff - ea < -20));
 	}
 
 	int get_float_exponent_base2(float d)

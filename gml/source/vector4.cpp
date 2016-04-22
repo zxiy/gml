@@ -2,6 +2,7 @@
 #include "../include/math_util.h"
 #include <cassert>
 #include <cmath>
+#include "inner_util.h"
 
 namespace gml
 {
@@ -80,5 +81,25 @@ namespace gml
 	float dot(const vec4& lhs, const vec4& rhs)
 	{
 		return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z + lhs.w * rhs.w;
+	}
+
+	float det44(const gml::vec4& row1, const gml::vec4& row2, const gml::vec4& row3, const gml::vec4& row4)
+	{
+		return determinant_impl(
+			row1.x, row1.y, row1.z, row1.w,
+			row2.x, row2.y, row2.z, row2.w,
+			row3.x, row3.y, row3.z, row3.w,
+			row4.x, row4.y, row4.z, row4.w
+			);
+	}
+
+	float det44_t(const gml::vec4& row1, const gml::vec4& row2, const gml::vec4& row3, const gml::vec4& row4)
+	{
+		return determinant_impl(
+			row1.x, row2.y, row3.z, row4.w,
+			row1.x, row2.y, row3.z, row4.w,
+			row1.x, row2.y, row3.z, row4.w,
+			row1.x, row2.y, row3.z, row4.w
+			);
 	}
 }

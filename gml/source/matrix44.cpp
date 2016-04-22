@@ -122,6 +122,14 @@ namespace gml
 		this->_30 = _30;	this->_31 = _31;	this->_32 = _32;	this->_33 = _33;
 	}
 
+	mat44::mat44(const vec4& row1, const vec4& row2, const vec4& row3, const vec4& row4)
+	{
+		this->row[0] = row1;
+		this->row[1] = row2;
+		this->row[2] = row3;
+		this->row[3] = row4;
+	}
+
 	mat44::mat44(const mat44& other)
 	{
 		*this = other;

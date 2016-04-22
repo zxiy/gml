@@ -27,6 +27,8 @@ namespace gml
 
 		explicit vec2(const vec3& v3);
 
+		explicit vec2(const vec4& v4);
+
 		vec2 operator-() const;
 
 		bool operator==(const vec2& rhs) const;
@@ -213,6 +215,10 @@ namespace gml
 
 	vec2 max_combine(const vec2& lhs, const vec2& rhs);
 
+	float det22(const gml::vec2& row1, const gml::vec2& row2);
+
+	float det22_t(const gml::vec2& row1, const gml::vec2& row2);
+
 	//vec3
 	vec3 operator+(float value, const vec3& rhs);
 
@@ -228,8 +234,16 @@ namespace gml
 
 	vec3 max_combine(const vec3& lhs, const vec3& rhs);
 
+	float det33(const gml::vec3& row1, const gml::vec3& row2, const gml::vec3& row3);
+
+	float det33_t(const gml::vec3& row1, const gml::vec3& row2, const gml::vec3& row3);
+
 	//vec4
 	float dot(const vec4& lhs, const vec4& rhs);
+
+	float det44(const gml::vec4& row1, const gml::vec4& row2, const gml::vec4& row3, const gml::vec4& row4);
+
+	float det44_t(const gml::vec4& row1, const gml::vec4& row2, const gml::vec4& row3, const gml::vec4& row4);
 
 	//swizzle
 	typedef enum SWIZZLE_VECTOR

@@ -2,6 +2,7 @@
 #include "../include/math_util.h"
 #include <cmath>
 #include <cassert>
+#include "inner_util.h"
 
 namespace gml
 {
@@ -32,7 +33,7 @@ namespace gml
 	{
 		set(v4.x, v4.y, v4.z);
 	}
-	
+
 	vec3 vec3::operator-() const
 	{
 		return vec3(-x, -y, -z);
@@ -196,7 +197,7 @@ namespace gml
 		}
 		return *this;
 	}
-	
+
 	vec3& vec3::inverse()
 	{
 		x = 1.0f / x;
@@ -266,5 +267,15 @@ namespace gml
 			lhs.y > rhs.y ? lhs.y : rhs.y,
 			lhs.z > rhs.z ? lhs.z : rhs.z
 			);
+	}
+
+	float det33(const gml::vec3& row1, const gml::vec3& row2, const gml::vec3& row3)
+	{
+		return determinant_impl(row1.x, row1.y, row1.z, row2.x, row2.y, row2.z, row3.x, row3.y, row3.z);
+	}
+
+	float det33_t(const gml::vec3& row1, const gml::vec3& row2, const gml::vec3& row3)
+	{
+		return determinant_impl(row1.x, row2.x, row3.x, row1.y, row2.y, row3.y, row1.z, row2.z, row3.z);
 	}
 }

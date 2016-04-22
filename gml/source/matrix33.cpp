@@ -151,6 +151,13 @@ namespace gml
 		this->_20 = _20;	this->_21 = _21;	this->_22 = _22;
 	}
 
+	mat33::mat33(const vec3& row1, const vec3& row2, const vec3& row3)
+	{
+		this->row[0] = row1;
+		this->row[1] = row2;
+		this->row[2] = row3;
+	}
+
 	mat33::mat33(const mat33& other)
 	{
 		*this = other;

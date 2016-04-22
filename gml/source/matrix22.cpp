@@ -56,6 +56,12 @@ namespace gml
 		this->_10 = _10;	this->_11 = _11;
 	}
 
+	mat22::mat22(const vec2& row1, const vec2& row2)
+	{
+		this->row[0] = row1;
+		this->row[1] = row2;
+	}
+
 	mat22::mat22(const mat22& other)
 	{
 		*this = other;

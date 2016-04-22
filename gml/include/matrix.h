@@ -34,6 +34,8 @@ namespace gml
 
 		mat22(float _00, float _01, float _10, float _11);
 
+		mat22(const vec2& row1, const vec2& row2);
+
 		mat22(const mat22& other);
 
 		mat22& operator=(const mat22& rhs);
@@ -115,6 +117,8 @@ namespace gml
 
 		mat33(float _00, float _01, float _02, float _10, float _11, float _12, float _20, float _21, float _22);
 
+		mat33(const vec3& row1, const vec3& row2, const vec3& row3);
+
 		mat33(const mat33& other);
 
 		mat33& operator=(const mat33& rhs);
@@ -186,6 +190,8 @@ namespace gml
 		mat44();
 
 		mat44(float _00, float _01, float _02, float _03, float _10, float _11, float _12, float _13, float _20, float _21, float _22, float _23, float _30, float _31, float _32, float _33);
+
+		mat44(const vec4& row1, const vec4& row2, const vec4& row3, const vec4& row4);
 
 		mat44(const mat44& other);
 

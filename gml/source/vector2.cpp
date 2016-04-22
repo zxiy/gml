@@ -1,5 +1,6 @@
 #include "../include/vector.h"
 #include "../include/math_util.h"
+#include "inner_util.h"
 #include <cmath>
 #include <cassert>
 
@@ -24,6 +25,11 @@ namespace gml
 	vec2::vec2(const vec3& vec3)
 	{
 		set(vec3.x, vec3.y);
+	}
+
+	vec2::vec2(const vec4& vec4)
+	{
+		set(vec4.x, vec4.y);
 	}
 
 	vec2 vec2::operator-() const
@@ -238,5 +244,15 @@ namespace gml
 			lhs.x > rhs.x ? lhs.x : rhs.x,
 			lhs.y > rhs.y ? lhs.y : rhs.y
 			);
+	}
+
+	float det22(const gml::vec2& row1, const gml::vec2& row2)
+	{
+		return determinant_impl(row1.x, row1.y, row2.x, row2.y);
+	}
+
+	float det22_t(const gml::vec2& row1, const gml::vec2& row2)
+	{
+		return determinant_impl(row1.x, row2.x, row1.y, row2.y);
 	}
 }

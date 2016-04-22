@@ -27,10 +27,7 @@ namespace gml
 
 	color4::color4(float r, float g, float b, float a)
 	{
-		this->r = r;
-		this->g = g;
-		this->b = b;
-		this->a = a;
+		set(r, g, b, a);
 	}
 	
 	color4::color4(const color3& c, float a)

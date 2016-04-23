@@ -65,9 +65,24 @@ namespace gml
 		return *this;
 	}
 
+
+	rect& rect::set_right(int x)
+	{
+		m_size.x = x - left();
+		if (m_size.x < 0) m_size.x = 0;
+		return *this;
+	}
+
 	rect& rect::set_top(int y)
 	{
 		m_pos.y = y;
+		return *this;
+	}
+
+	rect& rect::set_bottom(int y)
+	{
+		m_size.y = y - top();
+		if (m_size.y < 0) m_size.y = 0;
 		return *this;
 	}
 

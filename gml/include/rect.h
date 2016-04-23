@@ -53,7 +53,11 @@ namespace gml
 
 		rect& set_left(int x);
 
+		rect& set_right(int x);
+
 		rect& set_top(int y);
+
+		rect& set_bottom(int y);
 
 		rect& set_pos(int x, int y);
 

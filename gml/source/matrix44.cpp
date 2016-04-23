@@ -75,10 +75,10 @@ namespace gml
 	mat44 mat44::translate(float x, float y, float z)
 	{
 		return mat44(
-			-1, 0, 0, 0,
-			0, 1, 0, 0,
-			0, 0, 1, 0,
-			x, y, z, 1
+			-1, 0, 0, x,
+			0, 1, 0, y,
+			0, 0, 1, z,
+			0, 0, 0, 1
 			);
 	}
 
@@ -110,6 +110,37 @@ namespace gml
 			0, 0, -1, 0,
 			0, 0, 0, 1
 			);
+	}
+
+	mat44 mat44::look_at(const vec3& eye, const vec3& look, const vec3& up)
+	{
+		vec3 forward = (look - eye).normalize();
+		vec3 real_up = (up - forward * dot(forward, up.normalized())).normalize();
+		vec3 right = cross(real_up, forward).normalize();
+		mat44 rst(
+			vec4(right, -dot(eye, right)),
+			vec4(real_up, -dot(eye, real_up)),
+			vec4(forward, -dot(eye, forward)),
+			vec4(0, 0, 0, 1)
+			);
+
+		return rst;
+	}
+
+	mat44 mat44::perspective(float fov, float aspect, float near, float far)
+	{
+		float near_top = tanf(fov * 0.5f);
+		float near_right = near_top * aspect;
+
+		float z_range = near - far;
+		mat44 rst(
+			1.0f / near_right, 0, 0, 0,
+			0, 1.0f / near_top, 0, 0,
+			0, 0, -far / z_range, far * near / z_range,
+			0, 0, 1, 0);
+
+
+		return rst;
 	}
 
 	mat44::mat44() {}

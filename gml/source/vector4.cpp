@@ -34,6 +34,22 @@ namespace gml
 		return !(*this == rhs);
 	}
 
+	vec4 vec4::operator*(float value) const
+	{
+		vec4 copy(*this);
+		copy *= value;
+		return copy;
+	}
+
+	vec4& vec4::operator*=(float value)
+	{
+		x *= value;
+		y *= value;
+		z *= value;
+		w *= value;
+		return *this;
+	}
+
 	//hack
 	float& vec4::operator[](int index)
 	{
